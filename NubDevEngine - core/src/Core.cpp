@@ -19,7 +19,7 @@ int main(){
 	float time = timer.elapsed();
 
 	timer.reset();
-	read_obj("res/objects/dragon.obj");
+	std::deque<std::string> file = read_file_lines1("res/objects/dragon.obj");
 	std::cout << timer.elapsed() << " : char until /n " << std::endl;
 
 	system("PAUSE");

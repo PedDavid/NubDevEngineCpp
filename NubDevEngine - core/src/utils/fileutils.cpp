@@ -20,11 +20,24 @@ namespace engine{
 	}
 
 	std::deque<std::string> read_file_lines(const char* filepath){
-
+		std::deque<std::string> file;
+		std::ifstream input(filepath);
+		std::string line;
+		while (getline(input, line)){
+			file.push_back(line);
+		}
+		return file;
 	}
 
 	std::deque<std::string> read_file_lines1(const char* filepath){
-
+		std::deque<std::string> lines;
+		FILE *file = fopen(filepath, "rt");
+		char line[128];
+		while (fscanf(file, "%2000[^\n]\n", line) != EOF){
+			lines.push_back(line);
+		}
+		fclose(file);
+		return lines;
 	}
 
 	void read_obj(const char* filepath){
