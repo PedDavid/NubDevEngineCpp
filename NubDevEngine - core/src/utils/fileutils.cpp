@@ -44,7 +44,8 @@ namespace engine{
 		FILE *file = fopen(filepath, "rt");
 		
 		char lineHeader[128];
-		int x, y, z; 
+		float x, y, z;
+		bool hasUvs = false, hasNormals = false;
 
 		std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 		std::vector< maths::vec3 > temp_vertices;
@@ -57,22 +58,35 @@ namespace engine{
 				temp_vertices.push_back(maths::vec3(x, y, z));
 			}
 			else if (strcmp(lineHeader, "vt") == 0){
+				hasUvs = true;
 				fscanf(file, "%f %f\n", &x, &y);
 				temp_uvs.push_back(maths::vec2(x, y));
 			}
 			else if (strcmp(lineHeader, "vn") == 0){
+				hasNormals = true;
 				fscanf(file, "%f %f %f\n", &x, &y, &z);
 				temp_normals.push_back(maths::vec3(x, y, z));
 			}
 			else if (strcmp(lineHeader, "f") == 0){
 				unsigned int vIdx[3], vtIdx[3], vnIdx[3];
-				fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", 
-					&vIdx[0], &vtIdx[0], &vnIdx[0], &vIdx[1], &vtIdx[1], &vnIdx[1], &vIdx[2], &vtIdx[2], &vnIdx[2]);
+				if (hasUvs && hasNormals){
+					fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
+						&vIdx[0], &vtIdx[0], &vnIdx[0], &vIdx[1], &vtIdx[1], &vnIdx[1], &vIdx[2], &vtIdx[2], &vnIdx[2]);
+				}
+				else if (hasUvs && !hasNormals){
+					fscanf(file, "%d/%d %d/%d %d/%d\n",	&vIdx[0], &vtIdx[0], &vIdx[1], &vtIdx[1], &vIdx[2], &vtIdx[2]);
+				}
+				else if (!hasUvs && hasNormals){
+					fscanf(file, "%d//%d %d//%d %d//%d\n", &vIdx[0], &vnIdx[0], &vIdx[1], &vnIdx[1], &vIdx[2], &vnIdx[2]);
+				}
+				else if (!hasUvs && !hasNormals){
+					fscanf(file, "%d %d %d\n", &vIdx[0], &vIdx[1], &vIdx[2]);
+				}
 
-				for (unsigned int i = 0; i < 3; i++){   //3 vertices each face (Triangles)
+				for (unsigned int i = 0; i < 3; i++){						//3 vertices each face (Triangles)
 					vertexIndices.push_back(vIdx[i] - 1);
-					uvIndices.push_back(vtIdx[i] - 1);
-					normalIndices.push_back(vnIdx[i] - 1);
+					if (hasUvs)	uvIndices.push_back(vtIdx[i] - 1);
+					if (hasNormals)	normalIndices.push_back(vnIdx[i] - 1);
 				}
 			}
 			else{
@@ -81,18 +95,15 @@ namespace engine{
 		}
 		fclose(file);
 
-		std::vector<maths::vec3> out_vertex(vertexIndices.size());
-		std::vector<maths::vec2> out_uvs(vertexIndices.size());
-		std::vector<maths::vec3> out_normals(vertexIndices.size());
+		std::vector<maths::vec3> out_vertex(temp_vertices.size());
+		std::vector<maths::vec2> out_uvs(temp_vertices.size());
+		std::vector<maths::vec3> out_normals(temp_vertices.size());
 
 		for (unsigned int i = 0; i < vertexIndices.size(); i++){
 			unsigned int vertexPointer = vertexIndices[i];
-			out_vertex[vertexPointer] = temp_vertices[vertexIndices[vertexPointer]];
-			out_uvs[vertexPointer] = temp_uvs[uvIndices[vertexPointer]];
-			out_normals[vertexPointer] = temp_normals[normalIndices[vertexPointer]];
+			out_vertex[vertexPointer] = temp_vertices[vertexIndices[i]];
+			if (hasUvs) out_uvs[vertexPointer] = temp_uvs[uvIndices[i]];
+			if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
 		}
-		
-		return;
 	}
-
 }
