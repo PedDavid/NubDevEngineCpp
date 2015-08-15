@@ -95,13 +95,11 @@ namespace engine{
 		}
 		fclose(file);
 
-		std::vector<maths::vec3> out_vertex(temp_vertices.size());
 		std::vector<maths::vec2> out_uvs(temp_vertices.size());
 		std::vector<maths::vec3> out_normals(temp_vertices.size());
 
 		for (unsigned int i = 0; i < vertexIndices.size(); i++){
 			unsigned int vertexPointer = vertexIndices[i];
-			out_vertex[vertexPointer] = temp_vertices[vertexIndices[i]];
 			if (hasUvs) out_uvs[vertexPointer] = temp_uvs[uvIndices[i]];
 			if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
 		}
