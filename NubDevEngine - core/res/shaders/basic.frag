@@ -1,8 +1,14 @@
-#version 400 core
+#version 330 core
 
-out vec4 color;
+layout (location = 0) out vec4 color;
+
+uniform vec4 colour;
+uniform vec2 light;
+
+in vec4 pos;
 
 void main()
 {
-
+	float intensity = 1.0 / length(pos.xy - light);
+	color = colour * intensity;
 }

@@ -13,11 +13,11 @@ namespace engine{
 				glDeleteProgram(m_ShaderID);
 			}
 
-			void Shader::enable(){
+			void Shader::enable() const{
 				glUseProgram(m_ShaderID);
 			}
 			
-			void Shader::disable(){
+			void Shader::disable() const{
 				glUseProgram(0);
 			}
 
@@ -27,7 +27,7 @@ namespace engine{
 				GLuint fragmentID = load(m_FragPath, GL_FRAGMENT_SHADER);
 				glAttachShader(programID, vertexID);
 				glAttachShader(programID, fragmentID);
-				//bindAttributes();
+
 				glLinkProgram(programID);
 				glValidateProgram(programID);
 
@@ -39,11 +39,10 @@ namespace engine{
 
 			GLuint Shader::load(const char *path, GLuint type){
 				GLuint shaderID = glCreateShader(type);
-				std::string vertSourceString = read_file(m_VertPath);
+				std::string vertSourceString = read_file(path);
 				const char *source = vertSourceString.c_str();
 				glShaderSource(shaderID, 1, &source, NULL);
 				glCompileShader(shaderID);
-				std::cout << "Shader ID: " << shaderID << std::endl;
 
 				GLint result;
 				glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
@@ -52,11 +51,12 @@ namespace engine{
 					glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
 					std::vector<char> error(length);
 					glGetShaderInfoLog(shaderID, length, &length, &error[0]);
+					std::cout << "Eroor in Shader ID: " << shaderID << " at " << std::endl;
 					std::cout << &error[0] << std::endl;
 					glDeleteShader(shaderID);
 				}
 				else{
-					std::cout << path << " compiled" << std::endl;
+					std::cout << "Shader ID: " << shaderID << " at " << path << " compiled" << std::endl;
 				}
 				return shaderID;
 			}

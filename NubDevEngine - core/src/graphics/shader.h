@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
 #include <GL/glew.h>
 
 #include "../utils/fileutils.h"
@@ -28,8 +27,8 @@ namespace engine{
 			void setUniform4f(const GLchar *name, const maths::vec4& vector);
 			void setUniformMat4(const GLchar* name, const maths::mat4 &matrix);
 
-			void enable();
-			void disable();
+			void enable() const;
+			void disable() const;
 
 		private:
 			GLuint load();
