@@ -51,7 +51,6 @@ namespace engine{
 					glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
 					std::vector<char> error(length);
 					glGetShaderInfoLog(shaderID, length, &length, &error[0]);
-					std::cout << "Eroor in Shader ID: " << shaderID << " at " << std::endl;
 					std::cout << &error[0] << std::endl;
 					glDeleteShader(shaderID);
 				}

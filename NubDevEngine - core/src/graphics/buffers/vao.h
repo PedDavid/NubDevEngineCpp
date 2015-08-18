@@ -18,7 +18,7 @@ namespace engine{
 			VAO();
 			~VAO();
 
-			void addBuffers(VBO *buffer, GLuint index);
+			void addBuffer(VBO *buffer, GLuint index);
 			void bind() const;
 			void unbind() const;
 		};

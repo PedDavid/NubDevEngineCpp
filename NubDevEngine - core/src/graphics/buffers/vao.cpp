@@ -14,7 +14,7 @@ namespace engine{
 			glDeleteVertexArrays(1, &m_ArrayID);
 		}
 
-		void VAO::addBuffers(VBO *buffer, GLuint index){
+		void VAO::addBuffer(VBO *buffer, GLuint index){
 			bind();
 			buffer->bind();
 

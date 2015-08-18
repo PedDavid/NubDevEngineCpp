@@ -87,6 +87,8 @@
     <ClCompile Include="src\graphics\buffers\vao.cpp" />
     <ClCompile Include="src\graphics\buffers\vbo.cpp" />
     <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp" />
+    <ClCompile Include="src\graphics\renderers\sprite.cpp" />
+    <ClCompile Include="src\graphics\renderers\staticsprite.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\maths\mat4.cpp" />
     <ClCompile Include="src\maths\utils.cpp" />
@@ -104,6 +106,8 @@
     <ClInclude Include="src\graphics\buffers\vbo.h" />
     <ClInclude Include="src\graphics\renderers\renderable2d.h" />
     <ClInclude Include="src\graphics\renderers\renderer2d.h" />
+    <ClInclude Include="src\graphics\renderers\sprite.h" />
+    <ClInclude Include="src\graphics\renderers\staticsprite.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\renderers\simplerenderer2d.h" />
     <ClInclude Include="src\maths\mat4.h" />
