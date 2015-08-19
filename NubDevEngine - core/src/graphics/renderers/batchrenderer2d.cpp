@@ -1,5 +1,4 @@
 #include "batchrenderer2d.h"
-#include <iomanip>
 
 namespace engine{
 	namespace graphics{
