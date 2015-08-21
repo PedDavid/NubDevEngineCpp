@@ -1,9 +1,17 @@
 #pragma once
 
-#include "renderable2d.h"
+#include <GL/glew.h>
+#include <vector>
+
+#include "../../maths/maths.h"
+
+#include "../buffers/buffers.h"
+#include "../shader.h"
 
 namespace engine{
 	namespace graphics{
+
+		class Renderable2D;
 
 		class Renderer2D{
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include "renderer2d.h"
+#include "renderable2d.h"
 
 namespace engine{
 	namespace graphics{

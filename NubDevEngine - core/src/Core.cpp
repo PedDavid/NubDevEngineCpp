@@ -7,7 +7,8 @@
 #include "graphics/renderers/simplerenderer2d.h"
 #include "graphics/renderers/sprite.h"
 #include "utils/timer.h"
-#include "graphics\layers\tilelayer.h"
+#include "graphics/layers/tilelayer.h"
+#include "graphics/layers/group.h"
 
 #define WIDTH	1280
 #define HEIGHT	720
