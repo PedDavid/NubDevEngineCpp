@@ -13,8 +13,6 @@
 #define HEIGHT	720
 #define TITLE	"NubDevEngine"
 
-#define BATCH_RENDERER 1
-
 int main(){
 	using namespace engine;
 	using namespace graphics;
@@ -43,11 +41,14 @@ int main(){
 	int i = 0;
 	for (float y = -9.0f; y < 9.0f; y+= 0.1f){
 		for (float x = -16.0f; x < 16.0f; x+=0.1f){
-			layer.add(new Sprite(x, y, 0.04f, 0.04f, maths::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			layer.add(new Sprite(x, y, 0.09f, 0.09f, vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 			i++;
 		}
 	}
 	std::cout << "Sprite Amount : " << i << std::endl;
+
+	TileLayer layer1(s);
+	layer1.add(new Sprite(-2.5, -2.5, 5, 5, vec4(1.0f, 0.02f, 1.0f, 1.0f)));
 
 
 	unsigned short frames = 0;
@@ -60,6 +61,7 @@ int main(){
 		shader.setUniform2f("light", vec2((float)(x * 32.0f / 1280.0f - 16.0f), (float)(9.0f - y * 18.0f / 720.0f)));
 
 		layer.render();
+		layer1.render();
 
 		window.update();
 
