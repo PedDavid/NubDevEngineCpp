@@ -1,6 +1,8 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <vector>
+#include "../../maths/maths.h"
 
 namespace engine{
 	namespace graphics{
@@ -13,6 +15,8 @@ namespace engine{
 
 		public:
 			VBO(GLfloat *data, GLsizei count, GLuint componentCount);
+			VBO(std::vector<maths::vec3> *data);
+			VBO(std::vector<maths::vec4> *data);
 			~VBO();
 
 			void bind() const;

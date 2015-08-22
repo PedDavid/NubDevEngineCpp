@@ -51,6 +51,8 @@ int main(){
 	TileLayer layer1(s);
 	layer1.add(new Sprite(-2.5, -2.5, 5, 5, vec4(1.0f, 0.02f, 1.0f, 1.0f)));
 
+	VAO vao;
+	read_obj("res/objects/dragon.obj", &vao);
 
 	unsigned short frames = 0;
 	while (!window.closed())
@@ -61,8 +63,10 @@ int main(){
 		shader.enable();
 		shader.setUniform2f("light", vec2((float)(x * 32.0f / 1280.0f - 16.0f), (float)(9.0f - y * 18.0f / 720.0f)));
 
-		layer.render();
-		layer1.render();
+		//layer.render();
+		//layer1.render();
+		vao.bind();
+		vao.unbind();
 
 		window.update();
 

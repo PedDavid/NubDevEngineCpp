@@ -39,7 +39,7 @@ namespace engine{
 		return lines;
 	}
 
-	void read_obj(const char* filepath){
+	void read_obj(const char* filepath, graphics::VAO *vao){
 		std::deque<std::string> lines;
 		FILE *file = fopen(filepath, "rt");
 		
@@ -97,11 +97,18 @@ namespace engine{
 
 		std::vector<maths::vec2> out_uvs(temp_vertices.size());
 		std::vector<maths::vec3> out_normals(temp_vertices.size());
+		std::vector<maths::vec4> out_colors(temp_vertices.size());
 
 		for (unsigned int i = 0; i < vertexIndices.size(); i++){
 			unsigned int vertexPointer = vertexIndices[i];
+			out_colors[vertexPointer] = maths::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 			if (hasUvs) out_uvs[vertexPointer] = temp_uvs[uvIndices[i]];
 			if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
 		}
+
+		//graphics::VAO vao;
+		graphics::VBO vbo(&temp_vertices);
+		vao->addBuffer(new graphics::VBO(&temp_vertices), 0);
+		vao->addBuffer(new graphics::VBO(&out_colors), 1);
 	}
 }
