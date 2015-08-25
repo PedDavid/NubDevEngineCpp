@@ -34,33 +34,43 @@ int main(){
 	Window window(TITLE, WIDTH, HEIGHT);
 	//glClearColor(0.9f, 0.9f, 1.0f, 1.0f);
 
-	glActiveTexture(GL_TEXTURE0);
-	Texture texture("res/textures/test.png");
-	texture.bind();
+	//glActiveTexture(GL_TEXTURE0);
+	Texture *texture = new Texture("res/textures/test.png");
+	Texture *texture2 = new Texture("res/textures/crate.png");
+	Texture *texture3 = new Texture("res/textures/dirt.png");
+	//texture.bind();
 
 	mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 	Shader *s = new Shader("res/shaders/basic.vert", "res/shaders/basic.frag");
 	Shader shader = *s;
 	shader.enable();
 	shader.setUniformMat4("pr_matrix", ortho);
-	shader.setUniform1i("tex", 0);
+	
+
+	GLint texIDs[] = {
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	};
+
+	shader.setUniform1iv("textures", texIDs, 10);
 
 	TileLayer layer(s);
 
 	int i = 0;
 	for (float y = -9.0f; y < 9.0f; y++){
 		for (float x = -16.0f; x < 16.0f; x++){
-			layer.add(new Sprite(x, y, 0.9f, 0.9f, vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			int r = i % 3;//rand() % 3;
+			if (r == 0)
+				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture));
+			else if (r == 1)
+				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture2));
+			else if (r == 2)
+				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture3));
 			i++;
 		}
 	}
 	std::cout << "Sprite Amount : " << i << std::endl;
 
 	SoundManager::init();
-
-	TileLayer layer2(s);
-
-	layer2.add(new Sprite(-5, -5, 10, 10, vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 
 	float gain = 0.5f;
 	unsigned short frames = 0;
@@ -73,7 +83,6 @@ int main(){
 		shader.setUniform2f("light", vec2((float)(x * 32.0f / 1280.0f - 16.0f), (float)(9.0f - y * 18.0f / 720.0f)));
 
 		layer.render();
-		layer2.render();
 
 		window.update();
 		SoundManager::update();

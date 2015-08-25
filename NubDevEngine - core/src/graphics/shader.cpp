@@ -68,8 +68,16 @@ namespace engine{
 				glUniform1f(getUniformLocation(name), value);
 			}
 
+			void Shader::setUniform1fv(const GLchar *name, float *value, GLsizei size){
+				glUniform1fv(getUniformLocation(name), size, value);
+			}
+
 			void Shader::setUniform1i(const GLchar *name, int value){
 				glUniform1i(getUniformLocation(name), value);
+			}
+
+			void Shader::setUniform1iv(const GLchar *name, int *value, GLsizei size){
+				glUniform1iv(getUniformLocation(name), size, value);
 			}
 
 			void Shader::setUniform2f(const GLchar *name, const maths::vec2& vector){
