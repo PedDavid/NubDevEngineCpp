@@ -15,8 +15,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvorbis", "libvorbis\libv
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libogg", "libogg\libogg.vcxproj", "{5FA3003E-98BC-4A83-B4A2-2334DCABEDED}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AwesomeBump", "AwesomeBump\AwesomeBump.vcxproj", "{FC3CAF14-F125-4E7C-A051-B8DA7151834D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -35,10 +33,6 @@ Global
 		{5FA3003E-98BC-4A83-B4A2-2334DCABEDED}.Debug|Win32.Build.0 = Debug|Win32
 		{5FA3003E-98BC-4A83-B4A2-2334DCABEDED}.Release|Win32.ActiveCfg = Release|Win32
 		{5FA3003E-98BC-4A83-B4A2-2334DCABEDED}.Release|Win32.Build.0 = Release|Win32
-		{FC3CAF14-F125-4E7C-A051-B8DA7151834D}.Debug|Win32.ActiveCfg = Debug|Win32
-		{FC3CAF14-F125-4E7C-A051-B8DA7151834D}.Debug|Win32.Build.0 = Debug|Win32
-		{FC3CAF14-F125-4E7C-A051-B8DA7151834D}.Release|Win32.ActiveCfg = Release|Win32
-		{FC3CAF14-F125-4E7C-A051-B8DA7151834D}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

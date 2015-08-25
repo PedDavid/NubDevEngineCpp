@@ -91,6 +91,8 @@
     <ClCompile Include="ext\gorilla-audio\ga.c" />
     <ClCompile Include="ext\gorilla-audio\gau.c" />
     <ClCompile Include="ext\gorilla-audio\ga_stream.c" />
+    <ClCompile Include="src\audio\sound.cpp" />
+    <ClCompile Include="src\audio\SoundManager.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\graphics\layers\group.cpp" />
     <ClCompile Include="src\graphics\layers\layer.cpp" />
@@ -103,6 +105,7 @@
     <ClCompile Include="src\graphics\renderers\sprite.cpp" />
     <ClCompile Include="src\graphics\renderers\staticsprite.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
     <ClCompile Include="src\maths\mat4.cpp" />
     <ClCompile Include="src\maths\utils.cpp" />
     <ClCompile Include="src\maths\vec2.cpp" />
@@ -119,6 +122,8 @@
     <ClInclude Include="ext\gorilla-audio\ga.h" />
     <ClInclude Include="ext\gorilla-audio\gau.h" />
     <ClInclude Include="ext\gorilla-audio\ga_internal.h" />
+    <ClInclude Include="src\audio\sound.h" />
+    <ClInclude Include="src\audio\SoundManager.h" />
     <ClInclude Include="src\graphics\layers\group.h" />
     <ClInclude Include="src\graphics\layers\layer.h" />
     <ClInclude Include="src\graphics\layers\tilelayer.h" />
@@ -133,6 +138,7 @@
     <ClInclude Include="src\graphics\renderers\staticsprite.h" />
     <ClInclude Include="src\graphics\shader.h" />
     <ClInclude Include="src\graphics\renderers\simplerenderer2d.h" />
+    <ClInclude Include="src\graphics\Texture.h" />
     <ClInclude Include="src\maths\mat4.h" />
     <ClInclude Include="src\maths\maths.h" />
     <ClInclude Include="src\maths\utils.h" />
@@ -140,6 +146,8 @@
     <ClInclude Include="src\maths\vec3.h" />
     <ClInclude Include="src\maths\vec4.h" />
     <ClInclude Include="src\utils\fileutils.h" />
+    <ClInclude Include="src\utils\ImageLoad.h" />
+    <ClInclude Include="src\utils\StringUtils.h" />
     <ClInclude Include="src\utils\timer.h" />
     <ClInclude Include="src\window\window.h" />
   </ItemGroup>

@@ -7,6 +7,7 @@
 
 #include "../buffers/buffers.h"
 #include "../shader.h"
+#include "../texture.h"
 
 namespace engine{
 	namespace graphics{
