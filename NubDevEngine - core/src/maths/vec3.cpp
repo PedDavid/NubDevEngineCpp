@@ -3,11 +3,8 @@
 namespace engine{
 	namespace maths{
 
-		vec3::vec3(const float& x, const float& y, const float& z){
-			this->x = x;
-			this->y = y;
-			this->z = z;
-		}
+		vec3::vec3(const float& x, const float& y, const float& z)
+			: x(x), y(y), z(z){	}
 
 		vec3& vec3::add(const vec3& other){
 			x += other.x;
@@ -82,7 +79,7 @@ namespace engine{
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const vec3& vector){
-			return stream << "vec3: (" << vector.x << ", " << vector.y << ", " << vector.z << ") ";
+			return stream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")";
 		}
 	}
 }

@@ -17,7 +17,7 @@ namespace engine{
 			: m_ComponentCount(3){
 			glGenBuffers(1, &m_BufferID);
 			bind();
-			glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec3), data, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec3), &data->front(), GL_STATIC_DRAW);
 			unbind();
 		}
 
@@ -25,7 +25,7 @@ namespace engine{
 			: m_ComponentCount(4){
 			glGenBuffers(1, &m_BufferID);
 			bind();
-			glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec4), data, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec4), &data->front(), GL_STATIC_DRAW);
 			unbind();
 		}
 

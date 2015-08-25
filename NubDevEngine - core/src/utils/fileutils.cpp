@@ -39,7 +39,7 @@ namespace engine{
 		return lines;
 	}
 
-	void read_obj(const char* filepath, graphics::VAO *vao){
+	graphics::IBO read_obj(const char* filepath, graphics::VAO *vao){
 		std::deque<std::string> lines;
 		FILE *file = fopen(filepath, "rt");
 		
@@ -106,9 +106,9 @@ namespace engine{
 			if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
 		}
 
-		//graphics::VAO vao;
-		graphics::VBO vbo(&temp_vertices);
 		vao->addBuffer(new graphics::VBO(&temp_vertices), 0);
 		vao->addBuffer(new graphics::VBO(&out_colors), 1);
+		graphics::IBO ibo(&vertexIndices.front(), vertexIndices.size());
+		return ibo;
 	}
 }

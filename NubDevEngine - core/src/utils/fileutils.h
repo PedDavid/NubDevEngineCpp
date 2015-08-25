@@ -17,5 +17,5 @@ namespace engine{
 	std::deque<std::string> read_file_lines(const char* filepath);
 	std::deque<std::string> read_file_lines1(const char* filepath);
 
-	void read_obj(const char* filepath, graphics::VAO *vao);
+	graphics::IBO read_obj(const char* filepath, graphics::VAO *vao);
 }

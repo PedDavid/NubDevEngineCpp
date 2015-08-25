@@ -34,6 +34,8 @@ namespace engine{
 
 			vec4 multiply(const vec4 &other) const;
 			friend vec4 operator*(const mat4 &left, const vec4 &right);
+
+			friend std::ostream& operator<<(std::ostream& stream, const mat4& matrix);
 		};
 	}
 }

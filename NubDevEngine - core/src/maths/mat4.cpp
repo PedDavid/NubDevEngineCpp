@@ -137,5 +137,12 @@ namespace engine{
 
 			return result;
 		}
+
+		std::ostream& operator<<(std::ostream& stream, const mat4& matrix){
+			return stream << "Col 0: " << matrix.columns[0] << std::endl <<
+				"Col 1: " << matrix.columns[1] << std::endl <<
+				"Col 2: " << matrix.columns[2] << std::endl <<
+				"Col 3: " << matrix.columns[3];
+		}
 	}
 }

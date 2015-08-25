@@ -3,10 +3,8 @@
 namespace engine{
 	namespace maths{
 
-		vec2::vec2(const float& x, const float& y){
-			this->x = x;
-			this->y = y;
-		}
+		vec2::vec2(const float& x, const float& y) 
+			: x(x) , y(y){	}
 
 		vec2& vec2::add(const vec2& other){
 			x += other.x;
@@ -77,7 +75,7 @@ namespace engine{
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const vec2& vector){
-			return stream << "vec2: (" << vector.x << ", " << vector.y << ") ";
+			return stream << "(" << vector.x << ", " << vector.y << ")";
 		}
 	}
 }
