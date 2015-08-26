@@ -18,13 +18,12 @@ namespace engine{
 
 			glBindVertexArray(m_VAO);
 			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
+			glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);		
 			glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 			glEnableVertexAttribArray(SHADER_UV_INDEX);
 			glEnableVertexAttribArray(SHADER_TID_INDEX);
 			glEnableVertexAttribArray(SHADER_COLOR_INDEX);
-
 			glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::vertex));
 			glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::uv));
 			glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::tid));
@@ -60,15 +59,13 @@ namespace engine{
 			const std::vector<maths::vec2> &uv = renderable->getUV();
 			const GLuint tid = renderable->getTID();
 
-
-			unsigned int c = 0;
 			float ts = 0.0f;
 
 			if (tid > 0){
 				bool found = false;
 				for (int i = 0; i < m_TextureSlots.size(); i++){
 					if (m_TextureSlots[i] == tid){
-						ts = (float)(i + 1);
+						ts = (float)i;
 						found = true;
 						break;
 					}
@@ -79,18 +76,22 @@ namespace engine{
 						flush();
 						begin();
 					} 
-					m_TextureSlots.push_back(tid);
-					ts = (float)m_TextureSlots.size();
+					else{
+						m_TextureSlots.push_back(tid);
+						ts = (float)m_TextureSlots.back();
+					}
 				}
 			}
 			else{
-				int r = color.x * 255.0f;
-				int g = color.y * 255.0f;
-				int b = color.z * 255.0f;
-				int a = color.w * 255.0f;
 
-				c = a << 24 | b << 16 | g << 8 | r;
 			}
+
+			int r = color.x * 255.0f;
+			int g = color.y * 255.0f;
+			int b = color.z * 255.0f;
+			int a = color.w * 255.0f;
+
+			unsigned int c = a<<24 | b << 16 | g << 8 | r;
 
 			m_Buffer->vertex = *m_TransformationBack * position;
 			m_Buffer->uv = uv[0];

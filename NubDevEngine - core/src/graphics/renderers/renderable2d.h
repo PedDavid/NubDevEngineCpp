@@ -20,7 +20,7 @@ namespace engine {
 			maths::vec4 m_Color;
 			std::vector<maths::vec2> m_UV;
 
-			Texture *m_Texture = nullptr;
+			Texture *m_Texture;
 
 		public:
 			Renderable2D(maths::vec3 position, maths::vec2 size, maths::vec4 color)
