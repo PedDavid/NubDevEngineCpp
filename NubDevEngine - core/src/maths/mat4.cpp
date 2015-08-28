@@ -22,7 +22,7 @@ namespace engine{
 
 		mat4& mat4::multiply(const mat4 &other){
 			float data[16];
-			for (int y = 0; y < 0; y++){
+			for (int y = 0; y < 4; y++){
 				for (int x = 0; x < 4; x++){
 					float sum = 0.0f;
 					for (int e = 0; e < 4; e++){

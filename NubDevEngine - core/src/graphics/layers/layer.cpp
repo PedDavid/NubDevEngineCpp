@@ -27,8 +27,9 @@ namespace engine{
 			m_Shader->enable();
 			m_Renderer->begin();
 			for (int i = 0; i < m_Renderables.size(); i++){
-				m_Renderer->submit(m_Renderables[i]);
+				m_Renderables[i]->submit(m_Renderer);
 			}
+
 			m_Renderer->end();
 			m_Renderer->flush();
 			m_Shader->disable();

@@ -12,7 +12,8 @@ namespace engine{
 			maths::mat4 m_TransformationMatrix;
 
 		public:
-			Group();
+			Group(const maths::mat4 &transform);
+			void add(Renderable2D *renderable);
 			void submit(Renderer2D *renderer) const override;
 
 		};

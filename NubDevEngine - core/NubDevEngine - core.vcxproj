@@ -39,13 +39,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\FreeImage\include;$(SolutionDir)\Dependencies\OpenAL\include;$(SolutionDir)\Dependencies\libvorbis\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\FreeImage\include;$(SolutionDir)\Dependencies\OpenAL\include;$(SolutionDir)\Dependencies\libvorbis\include;$(SolutionDir)\Dependencies\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Dependencies\GLEW\lib;$(SolutionDir)\Dependencies\GLFW\lib-vc2013;$(SolutionDir)\Dependencies\FreeImage\lib;$(SolutionDir)\Dependencies\OpenAL\libs\Win32;$(SolutionDir)\Dependencies\libvorbis\bin;$(SolutionDir)\Dependencies\libogg\bin;$(SolutionDir)\Dependencies\FreeType\bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\FreeImage\include;$(SolutionDir)\Dependencies\OpenAL\include;$(SolutionDir)\Dependencies\libvorbis\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Dependencies\GLEW\include;$(SolutionDir)\Dependencies\GLFW\include;$(SolutionDir)\Dependencies\FreeImage\include;$(SolutionDir)\Dependencies\OpenAL\include;$(SolutionDir)\Dependencies\libvorbis\include;$(SolutionDir)\Dependencies\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Dependencies\GLEW\lib;$(SolutionDir)\Dependencies\GLFW\lib-vc2013;$(SolutionDir)\Dependencies\FreeImage\lib;$(SolutionDir)\Dependencies\OpenAL\libs\Win32;$(SolutionDir)\Dependencies\libvorbis\bin;$(SolutionDir)\Dependencies\libogg\bin;$(SolutionDir)\Dependencies\FreeType\bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
@@ -55,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerOutput>NoListing</AssemblerOutput>
     </ClCompile>
     <Link>
@@ -70,7 +70,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -85,6 +85,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ext\freetype-gl\platform.c" />
+    <ClCompile Include="ext\freetype-gl\texture-atlas.c" />
+    <ClCompile Include="ext\freetype-gl\texture-font.c" />
+    <ClCompile Include="ext\freetype-gl\vector.c" />
     <ClCompile Include="ext\gorilla-audio\common\gc_common.c" />
     <ClCompile Include="ext\gorilla-audio\common\gc_thread.c" />
     <ClCompile Include="ext\gorilla-audio\devices\ga_openal.c" />
@@ -101,6 +105,7 @@
     <ClCompile Include="src\graphics\buffers\ibo.cpp" />
     <ClCompile Include="src\graphics\buffers\vao.cpp" />
     <ClCompile Include="src\graphics\buffers\vbo.cpp" />
+    <ClCompile Include="src\graphics\renderers\label.cpp" />
     <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp" />
     <ClCompile Include="src\graphics\renderers\sprite.cpp" />
     <ClCompile Include="src\graphics\renderers\staticsprite.cpp" />
@@ -115,6 +120,13 @@
     <ClCompile Include="src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ext\freetype-gl\freetype-gl.h" />
+    <ClInclude Include="ext\freetype-gl\opengl.h" />
+    <ClInclude Include="ext\freetype-gl\platform.h" />
+    <ClInclude Include="ext\freetype-gl\texture-atlas.h" />
+    <ClInclude Include="ext\freetype-gl\texture-font.h" />
+    <ClInclude Include="ext\freetype-gl\vec234.h" />
+    <ClInclude Include="ext\freetype-gl\vector.h" />
     <ClInclude Include="ext\gorilla-audio\common\gc_common.h" />
     <ClInclude Include="ext\gorilla-audio\common\gc_thread.h" />
     <ClInclude Include="ext\gorilla-audio\common\gc_types.h" />
@@ -132,6 +144,7 @@
     <ClInclude Include="src\graphics\buffers\ibo.h" />
     <ClInclude Include="src\graphics\buffers\vao.h" />
     <ClInclude Include="src\graphics\buffers\vbo.h" />
+    <ClInclude Include="src\graphics\renderers\label.h" />
     <ClInclude Include="src\graphics\renderers\renderable2d.h" />
     <ClInclude Include="src\graphics\renderers\renderer2d.h" />
     <ClInclude Include="src\graphics\renderers\sprite.h" />

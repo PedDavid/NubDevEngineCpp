@@ -11,8 +11,13 @@
 #include "graphics/layers/tilelayer.h"
 #include "graphics/layers/group.h"
 #include "graphics/Texture.h"
+#include "graphics/renderers/label.h"
 
 #include "audio/SoundManager.h";
+#include "../ext/freetype-gl/freetype-gl.h"
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #define WIDTH	1280
 #define HEIGHT	720
@@ -32,7 +37,7 @@ int main(){
 	//std::cout << timer.elapsed() << " : char until /n " << std::endl;
 
 	Window window(TITLE, WIDTH, HEIGHT);
-	//glClearColor(0.9f, 0.9f, 1.0f, 1.0f);
+	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	//glActiveTexture(GL_TEXTURE0);
 	Texture *texture = new Texture("res/textures/test.png");
@@ -45,7 +50,6 @@ int main(){
 	Shader shader = *s;
 	shader.enable();
 	shader.setUniformMat4("pr_matrix", ortho);
-	
 
 	GLint texIDs[] = {
 		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -72,6 +76,13 @@ int main(){
 
 	SoundManager::init();
 
+	Group* g = new Group(maths::mat4::translation(maths::vec3(-15.8f, 7.0f, 0.0f)));
+	Label* fps = new Label("", 0.4f, 0.4f, maths::vec4(1, 1, 1, 1));
+	g->add(new Sprite(0, 0, 6, 1.5f, maths::vec4(0.3f, 0.3f, 0.3f, 0.9f)));
+	g->add(fps);
+	
+	layer.add(g);
+
 	float gain = 0.5f;
 	unsigned short frames = 0;
 	while (!window.closed())
@@ -90,6 +101,7 @@ int main(){
 		frames++;
 		if ((timer.elapsed() - time) > 1.0f){
 			time += 1.0f;
+			fps->text = std::to_string(frames) + " fps";
 			printf("%d FPS \n", frames);
 			frames = 0;
 		}
