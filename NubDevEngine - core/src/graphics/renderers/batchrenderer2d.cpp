@@ -46,9 +46,6 @@ namespace engine{
 			m_IBO = new IBO(indices, RENDERER_INDICES_SIZE);
 
 			glBindVertexArray(0);
-
-			m_FTAtlas = ftgl::texture_atlas_new(512, 512, 2);
-			m_FTFont = ftgl::texture_font_new_from_file(m_FTAtlas, 50, "arial.ttf");
 		}
 
 		void BatchRenderer2D::begin(){
@@ -121,15 +118,8 @@ namespace engine{
 			m_IndexCount += 6;
 		}
 
-		void BatchRenderer2D::drawString(const std::string &text, const maths::vec3 &position, const maths::vec4 &color){
+		void BatchRenderer2D::drawString(const std::string &text, const maths::vec3 &position, const Font &font){
 			using namespace ftgl;
-
-			int r = color.x * 255.0f;
-			int g = color.y * 255.0f;
-			int b = color.z * 255.0f;
-			int a = color.w * 255.0f;
-
-			unsigned int f_color = a << 24 | b << 16 | g << 8 | r;
 
 			float scaleX = 1280.0f / 32.0f;
 			float scaleY = 720.0f / 18.0f;
@@ -138,7 +128,7 @@ namespace engine{
 			float ts = 0.0f;
 			bool found = false;
 			for (int i = 0; i < m_TextureSlots.size(); i++){
-				if (m_TextureSlots[i] == m_FTAtlas->id){
+				if (m_TextureSlots[i] == font.getID()){
 					ts = (float)(i + 1);
 					found = true;
 					break;
@@ -150,13 +140,15 @@ namespace engine{
 					flush();
 					begin();
 				}
-				m_TextureSlots.push_back(m_FTAtlas->id);
+				m_TextureSlots.push_back(font.getID());
 				ts = (float)m_TextureSlots.size();
 			}
-			
+
+			texture_font_t* ftFont = font.getFTFont();
+
 			for (int i = 0; i < text.length(); i++){
 				char c = text.at(i);
-				texture_glyph_t *glyph = texture_font_get_glyph(m_FTFont, c);
+				texture_glyph_t *glyph = texture_font_get_glyph(ftFont, c);
 				if (glyph != NULL){
 
 					if (i > 0){
@@ -178,25 +170,25 @@ namespace engine{
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y0, 0);
 					m_Buffer->uv = maths::vec2(u0, v0);
 					m_Buffer->tid = ts;
-					m_Buffer->color = f_color;
+					m_Buffer->color = font.getColor();
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y1, 0);
 					m_Buffer->uv = maths::vec2(u0, v1);
 					m_Buffer->tid = ts;
-					m_Buffer->color = f_color;
+					m_Buffer->color = font.getColor();
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y1, 0);
 					m_Buffer->uv = maths::vec2(u1, v1);
 					m_Buffer->tid = ts;
-					m_Buffer->color = f_color;
+					m_Buffer->color = font.getColor();
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y0, 0);
 					m_Buffer->uv = maths::vec2(u1, v0);
 					m_Buffer->tid = ts;
-					m_Buffer->color = f_color;
+					m_Buffer->color = font.getColor();
 					m_Buffer++;
 
 					m_IndexCount += 6;
