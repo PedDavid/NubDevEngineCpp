@@ -8,6 +8,12 @@ namespace engine{
 
 		}
 
+		Group::~Group(){
+			for (Renderable2D *renderable : m_Renderables){
+				delete renderable;
+			}
+		}
+
 		void Group::add(Renderable2D *renderable){
 			m_Renderables.push_back(renderable);
 		}

@@ -15,6 +15,7 @@
 
 #include "audio/SoundManager.h";
 #include "../ext/freetype-gl/freetype-gl.h"
+#include "utils/ImageLoad.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -60,27 +61,31 @@ int main(){
 	TileLayer layer(s);
 
 	int i = 0;
-	for (float y = -9.0f; y < 9.0f; y++){
-		for (float x = -16.0f; x < 16.0f; x++){
-			int r = i % 3;//rand() % 3;
+	for (float y = -9.0f; y < 9.0f; y+=1){
+		for (float x = -16.0f; x < 16.0f; x+=1){
+			int r = rand() % 4;
+
+			int color = 0xffff0000 | rand() % 256;
 			if (r == 0)
 				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture));
 			else if (r == 1)
 				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture2));
 			else if (r == 2)
 				layer.add(new Sprite(x, y, 0.9f, 0.9f, texture3));
+			else if (r == 3){
+				layer.add(new Sprite(x, y, 0.9f, 0.9f, color));
+			}
 			i++;
 		}
 	}
 	std::cout << "Sprite Amount : " << i << std::endl;
 
 	SoundManager::init();
-
-	Font *font = new Font("arial", "arial.ttf", 40, 0xffff00ff);
+	FontManager::init();
 
 	Group* g = new Group(maths::mat4::translation(maths::vec3(-15.8f, 7.0f, 0.0f)));
-	Label* fps = new Label("", 0.4f, 0.4f, font);
-	g->add(new Sprite(0, 0, 6, 1.5f, maths::vec4(0.3f, 0.3f, 0.3f, 0.9f)));
+	Label* fps = new Label("", 0.4f, 0.4f, "default");
+	g->add(new Sprite(0, 0, 5, 1.5f, maths::vec4(0.3f, 0.3f, 0.3f, 0.9f)));
 	g->add(fps);
 	
 	layer.add(g);
@@ -93,7 +98,7 @@ int main(){
 		double x, y;
 		window.getMousePosition(x, y);
 		shader.enable();
-		shader.setUniform2f("light", vec2((float)(x * 32.0f / 1280.0f - 16.0f), (float)(9.0f - y * 18.0f / 720.0f)));
+		shader.setUniform2f("light", vec2((float)(x * 32.0f / window.getWidth() -16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
 
 		layer.render();
 
@@ -108,6 +113,9 @@ int main(){
 			frames = 0;
 		}
 	}
+
+	FontManager::clean();
+	SoundManager::clean();
 
 	return 0;
 }

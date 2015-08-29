@@ -30,12 +30,17 @@ namespace engine {
 			void update() const;
 			bool closed() const;
 
+			inline unsigned int getWidth() const { return m_Width; }
+			inline unsigned int getHeight() const { return m_Height; }
+
 			bool isKeyPressed(unsigned int key) const;
 			bool isMouseButtonPressed(unsigned int button) const;
 			void getMousePosition(double& x, double& y) const;
 
 		private:
 			bool init();
+
+			friend void window_resize(GLFWwindow *window, int width, int height);
 
 			friend void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 			friend void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);

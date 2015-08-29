@@ -12,10 +12,9 @@ namespace engine{
 		}
 
 		Layer::~Layer(){
-			delete m_Shader;
 			delete m_Renderer;
-			for (int i = 0; i < m_Renderables.size(); i++){
-				delete m_Renderables[i];
+			for (Renderable2D *renderable : m_Renderables){
+				delete renderable;
 			}
 		}
 

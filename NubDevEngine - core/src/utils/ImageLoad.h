@@ -6,7 +6,7 @@
 
 namespace engine{
 
-	static BYTE* loadImage(const char *filePath, GLsizei *width, GLsizei *height){
+	static BYTE* loadImage(const char *filePath, GLsizei *width, GLsizei *height, unsigned int *bits){
 
 		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 		FIBITMAP *dib = nullptr;
@@ -22,10 +22,17 @@ namespace engine{
 		if (!dib)
 			return nullptr;
 
+
+		BYTE* pixels = FreeImage_GetBits(dib);
 		*width = FreeImage_GetWidth(dib);
 		*height = FreeImage_GetHeight(dib);
+		*bits = FreeImage_GetBPP(dib);
 
-		return FreeImage_GetBits(dib);
+		int size = *width * *height * (*bits / 8);
+		BYTE* result = new BYTE[size];
+		memcpy(result, pixels, size);
+		FreeImage_Unload(dib);
+		return result;
 	}
 
 }

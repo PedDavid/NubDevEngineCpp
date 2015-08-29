@@ -17,6 +17,7 @@ namespace engine{
 
 		public:
 			virtual ~Layer();
+
 			virtual void add(Renderable2D *renderable);
 			virtual void render();
 		};

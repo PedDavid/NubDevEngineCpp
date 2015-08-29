@@ -1,9 +1,6 @@
 #pragma once
 
 #include <GL/glew.h>
-#include <FreeImage.h>
-
-#include <string>
 
 #include "../utils/ImageLoad.h"
 
@@ -16,6 +13,7 @@ namespace engine{
 			std::string m_FilePath;
 			GLuint m_TID;
 			GLsizei m_Width, m_Height;
+			unsigned int m_Bits;
 
 		public:
 			Texture(const std::string &path);

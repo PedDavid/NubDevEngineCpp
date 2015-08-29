@@ -6,7 +6,7 @@ namespace engine{
 		Texture::Texture(const std::string &filePath) 
 			: m_FilePath(filePath){
 
-			BYTE *pixels = loadImage(m_FilePath.c_str(), &m_Width, &m_Height);
+			BYTE *pixels = loadImage(m_FilePath.c_str(), &m_Width, &m_Height, &m_Bits);
 
 			glGenTextures(1, &m_TID);
 			glBindTexture(GL_TEXTURE_2D, m_TID);
@@ -14,6 +14,8 @@ namespace engine{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_Width, m_Height, 0, GL_BGR, GL_UNSIGNED_BYTE, pixels);
 			glBindTexture(GL_TEXTURE_2D, 0);
+
+			delete[] pixels;
 		}
 
 		Texture::~Texture(){
