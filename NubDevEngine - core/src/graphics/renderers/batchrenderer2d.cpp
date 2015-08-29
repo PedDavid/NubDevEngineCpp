@@ -72,7 +72,7 @@ namespace engine{
 					}
 				}
 				if (!found){
-					if (m_TextureSlots.size() >= 32){
+					if (m_TextureSlots.size() >= RENDERER_MAX_TEXTURES){
 						end();
 						flush();
 						begin();
@@ -199,6 +199,7 @@ namespace engine{
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
 			}
+			m_TextureSlots.clear();
 
 			glBindVertexArray(m_VAO);
 			m_IBO->bind();
