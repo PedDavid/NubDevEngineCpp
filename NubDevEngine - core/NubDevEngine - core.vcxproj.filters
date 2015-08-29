@@ -87,13 +87,7 @@
     <ClCompile Include="src\graphics\shader.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\renderers\simplerenderer2d.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\renderers\sprite.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\graphics\renderers\staticsprite.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\graphics\layers\tilelayer.cpp">
@@ -203,13 +197,7 @@
     <ClInclude Include="src\graphics\shader.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="src\graphics\renderers\simplerenderer2d.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="src\graphics\renderers\sprite.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\renderers\staticsprite.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\layers\group.h">

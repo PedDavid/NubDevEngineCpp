@@ -5,7 +5,6 @@
 #include "maths/maths.h"
 
 #include "graphics/renderers/batchrenderer2d.h"
-#include "graphics/renderers/simplerenderer2d.h"
 #include "graphics/renderers/sprite.h"
 #include "utils/timer.h"
 #include "graphics/layers/tilelayer.h"
@@ -33,18 +32,12 @@ int main(){
 	Timer timer;
 	float time = timer.elapsed();
 
-	//timer.reset();
-	//read_obj("res/objects/dragon.obj");
-	//std::cout << timer.elapsed() << " : char until /n " << std::endl;
-
 	Window window(TITLE, WIDTH, HEIGHT);
 	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	//glActiveTexture(GL_TEXTURE0);
 	Texture *texture = new Texture("res/textures/test.png");
 	Texture *texture2 = new Texture("res/textures/crate.png");
 	Texture *texture3 = new Texture("res/textures/dirt.png");
-	//texture.bind();
 
 	mat4 ortho = mat4::orthographic(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 	Shader *s = new Shader("res/shaders/basic.vert", "res/shaders/basic.frag");
