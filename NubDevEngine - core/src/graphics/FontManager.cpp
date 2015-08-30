@@ -7,9 +7,10 @@ namespace engine{
 		Font *FontManager::m_Font;
 
 		void FontManager::init(){
-			Font *font = new Font("default", "arial.ttf", 32, 0xffff00ff);
+			Font *font = new Font("default", "arial.ttf");
 			add(font);
 			m_Font = font;
+			std::cout << "[FontManager] Init Success" << std::endl;
 		}
 
 		void FontManager::add(Font *font){
@@ -20,7 +21,7 @@ namespace engine{
 			return get("default", 32);
 		}
 
-		Font *FontManager::getFont(){
+		Font *FontManager::get(){
 			return m_Font;
 		}
 
@@ -30,10 +31,10 @@ namespace engine{
 					return font;
 				}
 			}
-			std::cout << "[Font Error] Font " << name;
+			std::cout << "[Font] Font " << name;
 			if (size > 0)
-				std::cout << " with size " << size;
-			std::cout << " was not found!" << std::endl;
+				std::cout << " size " << size;
+			std::cout << " ERROR, not found" << std::endl;
 
 			return nullptr;
 		}
@@ -51,19 +52,7 @@ namespace engine{
 			for (Font *font : m_Fonts){
 				delete font;
 			}
+			std::cout << "[SoundManager] Closed" << std::endl;
 		}
-
-		void FontManager::setColor(unsigned int color, const std::string &name, int size){
-			if (name.empty()){
-				m_Font->setColor(color);
-			}
-			else{
-				Font *font = get(name, size);
-				if (font){
-					font->setColor(color);
-				}
-			}
-		}
-		
 	}
 }

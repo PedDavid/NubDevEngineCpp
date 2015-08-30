@@ -98,6 +98,7 @@
     <ClCompile Include="src\audio\sound.cpp" />
     <ClCompile Include="src\audio\SoundManager.cpp" />
     <ClCompile Include="src\Core.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\graphics\font.cpp" />
     <ClCompile Include="src\graphics\FontManager.cpp" />
     <ClCompile Include="src\graphics\layers\group.cpp" />
@@ -117,7 +118,6 @@
     <ClCompile Include="src\maths\vec3.cpp" />
     <ClCompile Include="src\maths\vec4.cpp" />
     <ClCompile Include="src\utils\fileutils.cpp" />
-    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>

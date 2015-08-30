@@ -55,7 +55,7 @@ namespace engine{
 					glDeleteShader(shaderID);
 				}
 				else{
-					std::cout << "Shader ID: " << shaderID << " at " << path << " compiled" << std::endl;
+					std::cout << "[Shader] ID: " << shaderID << " -> " << path << " -> Compilation Success" << std::endl;
 				}
 				return shaderID;
 			}

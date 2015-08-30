@@ -1,6 +1,15 @@
 #pragma once
 
 #include "window\window.h"
+
+#include "graphics\layers\layer.h"
+#include "graphics\layers\group.h"
+#include "graphics\renderers\sprite.h"
+#include "graphics\renderers\label.h"
+
+#include "audio\SoundManager.h"
+
+#include "maths\maths.h"
 #include "utils\timer.h"
 
 namespace engine{
@@ -8,8 +17,10 @@ namespace engine{
 	class NubDevEngine{
 
 	private:
-		graphics::Window* m_Window;
 		unsigned int m_FramesPerSecond, m_UpdatesPerSecond;
+
+	protected:
+		graphics::Window* m_Window;
 
 	protected:
 		NubDevEngine() : m_FramesPerSecond(0), m_UpdatesPerSecond(0) {
@@ -26,18 +37,20 @@ namespace engine{
 		}
 
 
+	public:
 		void start(){
 			init();
 			run();
 		}
 
-		// Runs once upon initialization
+	protected:
+		//Runs once upon initialization
 		virtual void init() = 0;
-		// Runs once per second
+		//Runs once per second
 		virtual void tick() { }
-		// Runs a set amount of times per second
+		//Runs a set amount of times per second
 		virtual void update() { }
-		// Runs as fast as possible(unless the frame rate is capped)
+		//Runs as fast as possible(unless the frame rate is capped)
 		virtual void render() = 0;
 
 		const unsigned int getFPS() const { return m_FramesPerSecond; }
@@ -54,8 +67,8 @@ namespace engine{
 			float updateBrake = 1.0f / 60.0f;
 			float tickBrake = 1.0f;
 
-			unsigned int frames;
-			unsigned int updates;
+			unsigned int frames = 0;
+			unsigned int updates = 0;
 
 			while (!m_Window->closed()){
 				m_Window->clear();

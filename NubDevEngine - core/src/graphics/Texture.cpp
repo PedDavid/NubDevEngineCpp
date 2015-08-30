@@ -16,6 +16,9 @@ namespace engine{
 			glBindTexture(GL_TEXTURE_2D, 0);
 
 			delete[] pixels;
+
+			std::cout << "[Texture] ID: " << m_TID << " -> " << m_FilePath << " -> Load Success" << std::endl << 
+				"    -> W: " << m_Width << " | H: " << m_Height << " | BPP: " << m_Bits << std::endl;
 		}
 
 		Texture::~Texture(){

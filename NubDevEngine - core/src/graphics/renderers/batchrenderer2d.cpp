@@ -109,11 +109,11 @@ namespace engine{
 			m_IndexCount += 6;
 		}
 
-		void BatchRenderer2D::drawString(const std::string &text, const maths::vec3 &position, const Font &font){
+		void BatchRenderer2D::drawString(const std::string &text, const maths::vec3 &position, const Font &font, unsigned int color){
 			using namespace ftgl;
 
-			float scaleX = 1280.0f / 32.0f;
-			float scaleY = 720.0f / 18.0f;
+			const maths::vec2 &scale = font.getScale();
+
 			float x = position.x;
 
 			float ts = 0.0f;
@@ -144,14 +144,14 @@ namespace engine{
 
 					if (i > 0){
 						float kerning = texture_glyph_get_kerning(glyph, text[i -1]);
-						x += kerning / scaleX;
+						x += kerning / scale.x;
 					}
 
 
-					float x0 = x + glyph->offset_x / scaleX;
-					float y0 = position.y + glyph->offset_y / scaleY;
-					float x1 = x0 + glyph->width / scaleX;
-					float y1 = y0 - glyph->height / scaleY;
+					float x0 = x + glyph->offset_x / scale.x;
+					float y0 = position.y + glyph->offset_y / scale.y;
+					float x1 = x0 + glyph->width / scale.x;
+					float y1 = y0 - glyph->height / scale.y;
 
 					float u0 = glyph->s0;
 					float v0 = glyph->t0;
@@ -161,30 +161,30 @@ namespace engine{
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y0, 0);
 					m_Buffer->uv = maths::vec2(u0, v0);
 					m_Buffer->tid = ts;
-					m_Buffer->color = font.getColor();
+					m_Buffer->color = color;
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y1, 0);
 					m_Buffer->uv = maths::vec2(u0, v1);
 					m_Buffer->tid = ts;
-					m_Buffer->color = font.getColor();
+					m_Buffer->color = color;
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y1, 0);
 					m_Buffer->uv = maths::vec2(u1, v1);
 					m_Buffer->tid = ts;
-					m_Buffer->color = font.getColor();
+					m_Buffer->color = color;
 					m_Buffer++;
 
 					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y0, 0);
 					m_Buffer->uv = maths::vec2(u1, v0);
 					m_Buffer->tid = ts;
-					m_Buffer->color = font.getColor();
+					m_Buffer->color = color;
 					m_Buffer++;
 
 					m_IndexCount += 6;
 
-					x += glyph->advance_x / scaleX;
+					x += glyph->advance_x / scale.x;
 				}
 			}
 		}

@@ -90,9 +90,6 @@
     <ClCompile Include="src\graphics\renderers\sprite.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\graphics\layers\tilelayer.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="src\graphics\renderers\batchrenderer2d.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
@@ -144,6 +141,9 @@
     <ClCompile Include="src\graphics\FontManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\layers\tilelayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -184,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="src\graphics\buffers\vbo.h">
       <Filter>Header Files\graphics\buffers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\graphics\layers\tilelayer.h">
-      <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\layers\layer.h">
       <Filter>Header Files\graphics</Filter>
@@ -276,6 +273,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\layers\tilelayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\NubDevEngine.h">

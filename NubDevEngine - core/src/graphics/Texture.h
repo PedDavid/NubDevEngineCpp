@@ -2,6 +2,8 @@
 
 #include <GL/glew.h>
 
+#include <iostream>
+
 #include "../utils/ImageLoad.h"
 
 namespace engine{

@@ -4,6 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "..\audio\SoundManager.h"
+#include "..\graphics\FontManager.h"
+
 namespace engine {
 	namespace graphics{
 

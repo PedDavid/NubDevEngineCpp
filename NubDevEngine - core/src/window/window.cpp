@@ -14,17 +14,19 @@ namespace engine{
 
 		Window::~Window(){
 			glfwTerminate();
+			FontManager::clean();
+			audio::SoundManager::clean();
 		}
 
 		bool Window::init(){
 			if (!glfwInit()){
-				std::cout << "Error initializing GLFW" << std::endl;
+				std::cout << "[GLFW] Init ERROR" << std::endl;
 				return false;
 			}
 			glfwWindowHint(GLFW_SAMPLES, 4);
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Name, NULL, NULL);
 			if (!m_Window){
-				std::cout << "Error creating GLFW window" << std::endl;
+				std::cout << "[GLFW] Window creation ERROR" << std::endl;
 				return false;
 			}
 			glfwMakeContextCurrent(m_Window);
@@ -33,19 +35,22 @@ namespace engine{
 			glfwSetKeyCallback(m_Window, key_callback);
 			glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 			glfwSetCursorPosCallback(m_Window, cursor_position_callback);
-			std::cout << "GLFW window initialized successfully" << std::endl;
+			std::cout << "[GLFW] Init Success" << std::endl;
 
 			if (glewInit() != GLEW_OK){
-				std::cout << "Could not initialize GLEW" << std::endl;
+				std::cout << "[GLEW] Init ERROR" << std::endl;
 				return false;
 			}
 
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-			std::cout << "GLEW initialized sucessfully" << std::endl;
-			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
-			std::cout << "GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+			std::cout << "[GLEW] Init success" << std::endl;
+			std::cout << "[OpenGL] v" << glGetString(GL_VERSION) << std::endl;
+			std::cout << "[GLSL] v" << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+
+			FontManager::init();
+			audio::SoundManager::init();
 
 			return true;
 		}
@@ -61,6 +66,8 @@ namespace engine{
 			}
 			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
+
+			audio::SoundManager::update();
 		}
 
 		bool Window::closed() const{
