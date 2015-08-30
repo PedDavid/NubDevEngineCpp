@@ -17,12 +17,15 @@ namespace engine{
 		public:
 			static void init();
 			static void add(Font *font);
+			static Font *getDefault();
 			static Font *getFont();
 			static Font *get(const std::string &name, int size = 0);
 			static void set(const std::string &name, int size = 0);
 			static void setDefault();
 			static void clean();
 
+			static void setColor(unsigned int color, const std::string &name = "", int size = 0);
+		
 		private:
 			FontManager();
 

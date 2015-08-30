@@ -19,7 +19,9 @@ namespace engine{
 			std::string m_FilePath;
 
 		public:
-			Font(std::string name, std::string filepath, int size, unsigned int color);
+			Font(std::string name, std::string filepath, int size = 32, unsigned int color = 0xffffffff);
+
+			void setColor(unsigned int color){ m_Color = color; }
 
 			inline ftgl::texture_font_t* getFTFont() const{ return m_FTFont; }
 

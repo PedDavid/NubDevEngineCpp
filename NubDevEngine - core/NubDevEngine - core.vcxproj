@@ -117,6 +117,7 @@
     <ClCompile Include="src\maths\vec3.cpp" />
     <ClCompile Include="src\maths\vec4.cpp" />
     <ClCompile Include="src\utils\fileutils.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="src\maths\vec2.h" />
     <ClInclude Include="src\maths\vec3.h" />
     <ClInclude Include="src\maths\vec4.h" />
+    <ClInclude Include="src\NubDevEngine.h" />
     <ClInclude Include="src\utils\fileutils.h" />
     <ClInclude Include="src\utils\ImageLoad.h" />
     <ClInclude Include="src\utils\StringUtils.h" />

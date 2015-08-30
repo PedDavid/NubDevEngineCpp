@@ -16,6 +16,10 @@ namespace engine{
 			m_Fonts.push_back(font);
 		}
 
+		Font *FontManager::getDefault(){
+			return get("default", 32);
+		}
+
 		Font *FontManager::getFont(){
 			return m_Font;
 		}
@@ -31,12 +35,12 @@ namespace engine{
 				std::cout << " with size " << size;
 			std::cout << " was not found!" << std::endl;
 
-			setDefault();
-			return m_Font;
+			return nullptr;
 		}
 
 		void FontManager::set(const std::string& name, int size){
-			m_Font = get(name, size);
+			Font *font = get(name, size);
+			m_Font = font ? font : m_Fonts.front();
 		}
 
 		void FontManager::setDefault(){
@@ -46,6 +50,18 @@ namespace engine{
 		void FontManager::clean(){
 			for (Font *font : m_Fonts){
 				delete font;
+			}
+		}
+
+		void FontManager::setColor(unsigned int color, const std::string &name, int size){
+			if (name.empty()){
+				m_Font->setColor(color);
+			}
+			else{
+				Font *font = get(name, size);
+				if (font){
+					font->setColor(color);
+				}
 			}
 		}
 		

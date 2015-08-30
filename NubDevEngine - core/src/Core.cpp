@@ -11,13 +11,13 @@
 #include "graphics/layers/group.h"
 #include "graphics/Texture.h"
 #include "graphics/renderers/label.h"
+#include "graphics/renderers/batchrenderer2d.h"
 
 #include "audio/SoundManager.h";
 #include "../ext/freetype-gl/freetype-gl.h"
 #include "utils/ImageLoad.h"
 
 #include <ft2build.h>
-#include FT_FREETYPE_H
 
 #define WIDTH	1280
 #define HEIGHT	720
@@ -73,15 +73,19 @@ int main(){
 	}
 	std::cout << "Sprite Amount : " << i << std::endl;
 
+	BatchRenderer2D renderer;
+
 	SoundManager::init();
 	FontManager::init();
 
 	Group* g = new Group(maths::mat4::translation(maths::vec3(-15.8f, 7.0f, 0.0f)));
-	Label* fps = new Label("", 0.4f, 0.4f, "default");
+	Label* fps = new Label("", 0.4f, 0.4f);
 	g->add(new Sprite(0, 0, 5, 1.5f, maths::vec4(0.3f, 0.3f, 0.3f, 0.9f)));
 	g->add(fps);
 	
 	layer.add(g);
+
+	unsigned int color = 0xff008888;
 
 	float gain = 0.5f;
 	unsigned short frames = 0;
@@ -95,6 +99,19 @@ int main(){
 
 		layer.render();
 
+		if (window.isKeyPressed(GLFW_KEY_UP)){
+			color += 1;
+		}
+		if (window.isKeyPressed(GLFW_KEY_DOWN)){
+			color -= 1;
+		}
+		if (window.isKeyPressed(GLFW_KEY_LEFT)){
+			color += 0x00000100;
+		}
+		if (window.isKeyPressed(GLFW_KEY_RIGHT)){
+			color -= 0x00000100;
+		}
+		FontManager::setColor(color, "default", 32);
 		window.update();
 		SoundManager::update();
 
