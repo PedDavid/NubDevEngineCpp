@@ -4,10 +4,13 @@
 
 #include <GL\glew.h>
 
-#include <iostream>
-#include <string>
+#include "Log.h"
 
-void _gl_check_error(const char *stmt, const char *file, int line);
+namespace engine{
+
+	void _gl_check_error(const char *stmt, const char *file, int line);
+
+}
 
 #ifdef _GL_DEBUG
 
@@ -17,6 +20,6 @@ void _gl_check_error(const char *stmt, const char *file, int line);
 
 #else
 
-	#define GL_CHECK(stmt) stmt
+	#define GlCheck(stmt) stmt;
 
 #endif

@@ -119,7 +119,9 @@
     <ClCompile Include="src\maths\vec4.cpp" />
     <ClCompile Include="src\utils\fileutils.cpp" />
     <ClCompile Include="src\utils\NubDevEngineGL.cpp" />
-    <ClCompile Include="src\utils\Win32Log.cpp" />
+    <ClCompile Include="src\utils\Win32Log.cpp">
+      <FileType>CppCode</FileType>
+    </ClCompile>
     <ClCompile Include="src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 
 #define _NUB_DEBUG
 #define _GL_DEBUG
+#define _DEBUG_SOURCE 1
 
 #if defined(_NUB_DEBUG) || defined(_GL_DEBUG)
 

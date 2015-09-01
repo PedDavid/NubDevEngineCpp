@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "window/window.h"
 #include "maths/maths.h"
 
 #include "graphics/renderers/sprite.h"
@@ -12,31 +11,19 @@
 #include "graphics/renderers/batchrenderer2d.h"
 
 #include "audio/SoundManager.h";
-#include "utils\ImageLoad.h";
+#include "utils/ImageLoad.h";
 #include "utils/StringUtils.h"
+
+#include "utils\Log.h"
 
 #define WIDTH	1280
 #define HEIGHT	720
 #define TITLE	"NubDevEngine"
 
-#define DUBS_LOG(x) \
-	if(!x) { \
-		log_fail(x); \
-	}
-
-template <typename T>
-void log_fail(const T &t){
-	std::string name = typeid(t).name();
-	engine::class_name(name);
-	std::cout << name << std::endl;
-}
-
-
 int main(){
 	using namespace engine;
 	using namespace graphics;
-	Texture *swag = nullptr;
-	DUBS_LOG(swag);
+	GlCheck(glClear(GL_COLOR));
 	system("PAUSE");
 	return 0;
 }

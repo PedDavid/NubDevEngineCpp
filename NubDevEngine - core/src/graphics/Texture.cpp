@@ -3,8 +3,7 @@
 namespace engine{
 	namespace graphics{
 
-		Texture::Texture(const std::string &filePath) 
-			: m_FilePath(filePath){
+		Texture::Texture(const std::string &filePath) : m_FilePath(filePath){
 
 			BYTE *pixels = loadImage(m_FilePath.c_str(), &m_Width, &m_Height, &m_Bits);
 
@@ -22,8 +21,8 @@ namespace engine{
 
 			delete[] pixels;
 
-			std::cout << "[Texture] ID: " << m_TID << " -> " << m_FilePath << " -> Load Success" << std::endl << 
-				"    -> W: " << m_Width << " | H: " << m_Height << " | BPP: " << m_Bits << std::endl;
+			//std::cout << "[Texture] ID: " << m_TID << " -> " << m_FilePath << " -> Load Success" << std::endl << 
+			//	"    -> W: " << m_Width << " | H: " << m_Height << " | BPP: " << m_Bits << std::endl;
 		}
 
 		Texture::~Texture(){
