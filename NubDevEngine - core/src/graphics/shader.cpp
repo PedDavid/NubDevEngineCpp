@@ -49,13 +49,14 @@ namespace engine{
 				if (result == GL_FALSE){
 					GLint length;
 					glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
+					length -= 1; // Delete Random '\n' at end of log;
 					std::vector<char> error(length);
 					glGetShaderInfoLog(shaderID, length, &length, &error[0]);
-					std::cout << &error[0] << std::endl;
+					NUB_ERROR(std::string("[GLSL] Shader compilation \n") + &error[0]);
 					glDeleteShader(shaderID);
 				}
 				else{
-					std::cout << "[Shader] ID: " << shaderID << " -> " << path << " -> Compilation Success" << std::endl;
+					NUB_SUCCESS("[Shader] ID: " + std::to_string(shaderID) + " | Path: " + path);
 				}
 				return shaderID;
 			}

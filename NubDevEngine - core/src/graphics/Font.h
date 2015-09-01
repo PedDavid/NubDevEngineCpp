@@ -1,9 +1,10 @@
 #pragma once
 
-#include <string>
+#include "..\utils\Log.h"
+#include "..\maths\maths.h"
+
 #include "..\..\ext\freetype-gl\freetype-gl.h"
 
-#include "..\maths\maths.h"
 
 namespace engine{
 	namespace graphics{

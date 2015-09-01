@@ -12,7 +12,7 @@ namespace engine{
 			gc_initialize(0);
 			m_Mgr = gau_manager_create();
 			m_Mixer = gau_manager_mixer(m_Mgr);
-			std::cout << "[SoundManager] Init Success" << std::endl;
+			NUB_SUCCESS("[SoundManager] INIT");
 		}
 
 		void SoundManager::add(Sound *sound){
@@ -38,7 +38,7 @@ namespace engine{
 			}
 			gau_manager_destroy(m_Mgr);
 			gc_shutdown();
-			std::cout << "[SoundManager] Closed" << std::endl;
+			NUB_SUCCESS("[SoundManager] CLOSED");
 		}
 
 	}

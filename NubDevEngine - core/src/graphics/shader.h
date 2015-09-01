@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../utils/NubDevEngineGL.h"
-
+#include "../utils/Log.h"
 #include "../utils/fileutils.h"
 #include "../maths/maths.h"
 

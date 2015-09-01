@@ -21,8 +21,8 @@ namespace engine{
 
 			delete[] pixels;
 
-			//std::cout << "[Texture] ID: " << m_TID << " -> " << m_FilePath << " -> Load Success" << std::endl << 
-			//	"    -> W: " << m_Width << " | H: " << m_Height << " | BPP: " << m_Bits << std::endl;
+			NUB_SUCCESS(std::string("[Texture] ID: ") + std::to_string(m_TID) + " | Path: " + m_FilePath + 
+				" | W: " + std::to_string(m_Width) + " | H: " + std::to_string(m_Height) + " | BPP: " + std::to_string(m_Bits));
 		}
 
 		Texture::~Texture(){

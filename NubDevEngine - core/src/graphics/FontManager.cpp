@@ -10,7 +10,7 @@ namespace engine{
 			Font *font = new Font("default", "arial.ttf");
 			add(font);
 			m_Font = font;
-			std::cout << "[FontManager] Init Success" << std::endl;
+			NUB_SUCCESS("[FontManager] INIT");
 		}
 
 		void FontManager::add(Font *font){
@@ -31,10 +31,7 @@ namespace engine{
 					return font;
 				}
 			}
-			std::cout << "[Font] Font " << name;
-			if (size > 0)
-				std::cout << " size " << size;
-			std::cout << " ERROR, not found" << std::endl;
+			NUB_ERROR("[Font] " + name + (size > 0 ? " size " + std::to_string(size) : "") + " not found");
 
 			return nullptr;
 		}
@@ -52,7 +49,7 @@ namespace engine{
 			for (Font *font : m_Fonts){
 				delete font;
 			}
-			std::cout << "[SoundManager] Closed" << std::endl;
+			NUB_SUCCESS("[SoundManager] CLOSED");
 		}
 	}
 }

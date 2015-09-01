@@ -21,9 +21,8 @@ namespace engine {
 				default: error = std::to_string(err);
 			}
 
-			SPARKY_ERROR(std::string("[OpenGL] ") + error + " | Call: " + stmt + '\n' + 
+			NUB_ERROR(std::string("[OpenGL] ") + error + " | Call: " + stmt + '\n' + 
 				'\t' + "File: " + file + " | Line: " + std::to_string(line));
-			system("PAUSE");
 			err = glGetError();
 		}
 	}

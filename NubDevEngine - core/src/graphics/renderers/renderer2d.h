@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../utils/NubDevEngineGL.h"
+#include "../../utils/Log.h"
 
 #include <vector>
 
@@ -40,9 +41,12 @@ namespace engine{
 			}
 
 			void pop(){
-				//TODO: Add to log!
+				
 				if (m_TransformationStack.size() > 1){
 					m_TransformationStack.pop_back();
+				}
+				else{
+					NUB_WARN("[Renderer2D] Can't pop TransformationStack");
 				}
 				m_TransformationBack = &m_TransformationStack.back();
 			}

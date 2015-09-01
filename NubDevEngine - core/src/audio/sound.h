@@ -1,9 +1,8 @@
 #pragma once
 
-#include <string>
-#include <iostream>
 #include <queue>
 
+#include "../utils/Log.h"
 #include "../utils/StringUtils.h"
 
 #include "../../ext/gorilla-audio/ga.h"

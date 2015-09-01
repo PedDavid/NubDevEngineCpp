@@ -9,13 +9,17 @@ namespace engine{
 			std::vector<std::string> split = split_string(m_FilePath, '.');
 			if (split.size() < 2)
 			{
-				std::cout << "[Sound] Path ERROR " << m_FilePath << std::endl;
+				NUB_ERROR("[Sound] Path: " + filePath + " is incorrect");
 				return;
 			}
+
 			m_Sound = gau_load_sound_file(filePath.c_str(), split.back().c_str());
 
-			if (m_Sound == nullptr)
-				std::cout << "[Sound] Load ERROR " << m_FilePath << std::endl;
+			if (!m_Sound){
+				NUB_ERROR("[Sound] Load " + name + " | Path: " + filePath);
+			}else{
+				NUB_SUCCESS("[Sound] Load " + name + " | Path: " + filePath);
+			}
 		}
 
 		Sound::~Sound(){
@@ -43,7 +47,7 @@ namespace engine{
 
 		void Sound::stop(){
 			if (!ga_handle_playing(m_Handle)){
-				std::cout << "[Sound] Stop ERROR, no sound playing" << std::endl;
+				NUB_WARN("[Sound] Can't Stop, no sound playing");
 				return;
 			}
 			ga_handle_stop(m_Handle);
@@ -52,7 +56,7 @@ namespace engine{
 
 		void Sound::setGain(float gain){
 			if (!ga_handle_playing(m_Handle)){
-				std::cout << "[Sound] Set Gain ERROR, no sound playing" << std::endl;
+				NUB_WARN("[Sound] Can't set Gain, no sound playing");
 				return;
 			}
 			m_Gain = gain;

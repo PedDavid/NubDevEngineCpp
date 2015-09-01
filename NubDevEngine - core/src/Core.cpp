@@ -14,19 +14,13 @@
 #include "utils/ImageLoad.h";
 #include "utils/StringUtils.h"
 
+#include "window\window.h"
+
 #include "utils\Log.h"
 
 #define WIDTH	1280
 #define HEIGHT	720
 #define TITLE	"NubDevEngine"
-
-int main(){
-	using namespace engine;
-	using namespace graphics;
-	GlCheck(glClear(GL_COLOR));
-	system("PAUSE");
-	return 0;
-}
 
 #if 0
 int main(){

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "..\utils\NubDevEngineGL.h"
+#include "..\utils\Log.h"
 
 #include <GLFW/glfw3.h>
 

@@ -20,13 +20,13 @@ namespace engine{
 
 		bool Window::init(){
 			if (!glfwInit()){
-				std::cout << "[GLFW] Init ERROR" << std::endl;
+				NUB_FATAL("[GLFW] INIT");
 				return false;
 			}
 			glfwWindowHint(GLFW_SAMPLES, 4);
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Name, NULL, NULL);
 			if (!m_Window){
-				std::cout << "[GLFW] Window creation ERROR" << std::endl;
+				NUB_FATAL("[GLFW] WINDOW CREATION");
 				return false;
 			}
 			glfwMakeContextCurrent(m_Window);
@@ -35,19 +35,19 @@ namespace engine{
 			glfwSetKeyCallback(m_Window, key_callback);
 			glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 			glfwSetCursorPosCallback(m_Window, cursor_position_callback);
-			std::cout << "[GLFW] Init Success" << std::endl;
+			NUB_SUCCESS("[GLFW] INIT");
 
 			if (glewInit() != GLEW_OK){
-				std::cout << "[GLEW] Init ERROR" << std::endl;
+				NUB_FATAL("[GLEW] INIT");
 				return false;
 			}
 
 			GlCheck(glEnable(GL_BLEND));
 			GlCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
-			std::cout << "[GLEW] Init success" << std::endl;
-			std::cout << "[OpenGL] v" << glGetString(GL_VERSION) << std::endl;
-			std::cout << "[GLSL] v" << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+			NUB_SUCCESS("[GLEW] INIT");
+			NUB_INFO(std::string("[OpenGL] v") + (char*)glGetString(GL_VERSION));
+			NUB_INFO(std::string("[GLSL] v") + (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 			FontManager::init();
 			audio::SoundManager::init();
@@ -79,7 +79,7 @@ namespace engine{
 
 		bool Window::isKeyPressed(unsigned int key) const{
 			if (key >= MAX_KEYS){
-				std::cout << "Unasigned key with code " << key << std::endl;
+				NUB_ERROR("[Keys] " + std::to_string(key) + " has no code assigned");
 				return false;
 			}
 			return m_Keys[key];
@@ -87,7 +87,7 @@ namespace engine{
 
 		bool Window::isMouseButtonPressed(unsigned int button) const{
 			if (button >= MAX_BUTTONS){
-				std::cout << "Unasigned key with code " << button << std::endl;
+				NUB_ERROR("[Buttons] " + std::to_string(button) + " has no code assigned");
 				return false;
 			}
 			return m_Buttons[button];

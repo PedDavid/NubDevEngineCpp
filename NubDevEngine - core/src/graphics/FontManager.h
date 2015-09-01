@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../utils/Log.h"
+
 #include <iostream>
 #include <vector>
 

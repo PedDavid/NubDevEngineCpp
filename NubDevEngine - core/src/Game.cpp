@@ -1,4 +1,3 @@
-#include <Windows.h>
 #include "NubDevEngine.h"
 #include <iostream>
 
@@ -28,6 +27,9 @@ public:
 		createWindow("Test Game", 960, 540);
 		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		FontManager::get()->setScale(m_Window->getWidth() / 32.0f, m_Window->getHeight() / 18.0f);
+		Font *font = new Font("comic", "comic.ttf");
+
+		Sound *sound = new Sound("swag", "test.wav");
 
 		shader = new Shader("res/shaders/basic.vert", "res/shaders/basic.frag");
 
@@ -82,10 +84,8 @@ public:
 
 };
 
-//int main(){
-//	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-//	SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_INTENSITY);
-//	Game game;
-//	game.start();
-//	return 0;
-//}
+int main(){
+	Game game;
+	game.start();
+	return 0;
+}
