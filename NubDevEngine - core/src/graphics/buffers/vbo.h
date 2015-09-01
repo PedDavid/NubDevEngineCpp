@@ -1,6 +1,7 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "../../utils/NubDevEngineGL.h"
+
 #include <vector>
 #include "../../maths/maths.h"
 

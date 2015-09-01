@@ -16,4 +16,13 @@ namespace engine {
 		return elems;
 	}
 
+	static void class_name(std::string &path, bool upperCase = true){
+		path = split_string(path, ':').back();
+		path = split_string(path, ' ').front();
+		if (upperCase){
+			for (std::string::iterator p = path.begin(); path.end() != p; ++p)
+				*p = toupper(*p);
+		}
+	}
+
 }

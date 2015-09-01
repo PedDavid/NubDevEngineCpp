@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GL/glew.h>
+#include "../../utils/NubDevEngineGL.h"
 
 namespace engine{
 	namespace graphics{

@@ -118,6 +118,8 @@
     <ClCompile Include="src\maths\vec3.cpp" />
     <ClCompile Include="src\maths\vec4.cpp" />
     <ClCompile Include="src\utils\fileutils.cpp" />
+    <ClCompile Include="src\utils\NubDevEngineGL.cpp" />
+    <ClCompile Include="src\utils\Win32Log.cpp" />
     <ClCompile Include="src\window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +139,7 @@
     <ClInclude Include="ext\gorilla-audio\ga_internal.h" />
     <ClInclude Include="src\audio\sound.h" />
     <ClInclude Include="src\audio\SoundManager.h" />
+    <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\graphics\font.h" />
     <ClInclude Include="src\graphics\FontManager.h" />
     <ClInclude Include="src\graphics\layers\group.h" />
@@ -161,6 +164,8 @@
     <ClInclude Include="src\maths\vec4.h" />
     <ClInclude Include="src\NubDevEngine.h" />
     <ClInclude Include="src\utils\fileutils.h" />
+    <ClInclude Include="src\utils\Log.h" />
+    <ClInclude Include="src\utils\NubDevEngineGL.h" />
     <ClInclude Include="src\utils\ImageLoad.h" />
     <ClInclude Include="src\utils\StringUtils.h" />
     <ClInclude Include="src\utils\timer.h" />

@@ -1,4 +1,6 @@
+#include <Windows.h>
 #include "NubDevEngine.h"
+#include <iostream>
 
 using namespace engine;
 using namespace graphics;
@@ -75,12 +77,15 @@ public:
 
 	void tick() override{
 		fps->text = std::to_string(getFPS()) + " FPS";
+		std::cout << "FPS: " << getFPS() << " | UPS: " << getUPS() << std::endl;
 	}
 
 };
 
-int main(){
-	Game game;
-	game.start();
-	return 0;
-}
+//int main(){
+//	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+//	SetConsoleTextAttribute(handle, FOREGROUND_RED | FOREGROUND_INTENSITY);
+//	Game game;
+//	game.start();
+//	return 0;
+//}

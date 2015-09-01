@@ -42,8 +42,8 @@ namespace engine{
 				return false;
 			}
 
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			GlCheck(glEnable(GL_BLEND));
+			GlCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
 			std::cout << "[GLEW] Init success" << std::endl;
 			std::cout << "[OpenGL] v" << glGetString(GL_VERSION) << std::endl;
@@ -56,14 +56,10 @@ namespace engine{
 		}
 
 		void Window::clear() const{
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			GlCheck(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 		}
 
 		void Window::update() const{
-			GLenum error = glGetError();
-			if (error != GL_NO_ERROR){
-				std::cout << "OpenGL Error: " << error << std::endl;
-			}
 			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
 
@@ -75,7 +71,7 @@ namespace engine{
 		}
 
 		void window_resize(GLFWwindow *window, int width, int height){
-			glViewport(0, 0, width, height);
+			GlCheck(glViewport(0, 0, width, height));
 			Window* win = (Window*)glfwGetWindowUserPointer(window);
 			win->m_Width = width;
 			win->m_Height = height;

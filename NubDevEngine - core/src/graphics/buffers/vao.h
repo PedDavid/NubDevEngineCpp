@@ -1,7 +1,8 @@
 #pragma once
 
+#include "../../utils/NubDevEngineGL.h"
+
 #include <vector>
-#include <GL/glew.h>
 
 #include "vbo.h"
 

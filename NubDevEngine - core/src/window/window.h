@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <GL/glew.h>
+#include "..\utils\NubDevEngineGL.h"
+
 #include <GLFW/glfw3.h>
 
 #include "..\audio\SoundManager.h"
