@@ -2,12 +2,11 @@
 
 #include "maths/maths.h"
 
-#include "graphics/renderers/sprite.h"
+#include "graphics/renderables/sprite.h"
 #include "utils/timer.h"
-#include "graphics/layers/tilelayer.h"
 #include "graphics/layers/group.h"
 #include "graphics/Texture.h"
-#include "graphics/renderers/label.h"
+#include "graphics/renderables/label.h"
 #include "graphics/renderers/batchrenderer2d.h"
 
 #include "audio/SoundManager.h";

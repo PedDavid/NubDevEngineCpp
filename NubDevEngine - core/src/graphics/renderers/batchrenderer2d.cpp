@@ -82,25 +82,33 @@ namespace engine{
 				}
 			}
 
-			m_Buffer->vertex = *m_TransformationBack * position;
+			maths::vec3 new_pos = *m_TransformationBack * position;
+
+			m_Buffer->vertex = new_pos;
 			m_Buffer->uv = uv[0];
 			m_Buffer->tid = ts;
 			m_Buffer->color = color;
 			m_Buffer++;
 
-			m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x, position.y + size.y, position.z);
+			new_pos.y += size.y;
+
+			m_Buffer->vertex = new_pos;
 			m_Buffer->uv = uv[1];
 			m_Buffer->tid = ts;
 			m_Buffer->color = color;
 			m_Buffer++;
 
-			m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x + size.x, position.y + size.y, position.z);
+			new_pos.x += size.x;
+
+			m_Buffer->vertex = new_pos;
 			m_Buffer->uv = uv[2];
 			m_Buffer->tid = ts;
 			m_Buffer->color = color;
 			m_Buffer++;
 
-			m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x + size.x, position.y, position.z);
+			new_pos.y -= size.y;
+
+			m_Buffer->vertex = new_pos;
 			m_Buffer->uv = uv[3];
 			m_Buffer->tid = ts;
 			m_Buffer->color = color;
@@ -113,8 +121,6 @@ namespace engine{
 			using namespace ftgl;
 
 			const maths::vec2 &scale = font.getScale();
-
-			float x = position.x;
 
 			float ts = 0.0f;
 			bool found = false;
@@ -137,6 +143,8 @@ namespace engine{
 
 			texture_font_t* ftFont = font.getFTFont();
 
+			float x = position.x;
+
 			for (int i = 0; i < text.length(); i++){
 				char c = text.at(i);
 				texture_glyph_t *glyph = texture_font_get_glyph(ftFont, c);
@@ -147,36 +155,41 @@ namespace engine{
 						x += kerning / scale.x;
 					}
 
-
-					float x0 = x + glyph->offset_x / scale.x;
-					float y0 = position.y + glyph->offset_y / scale.y;
-					float x1 = x0 + glyph->width / scale.x;
-					float y1 = y0 - glyph->height / scale.y;
+					maths::vec3 current_pos(x + glyph->offset_x / scale.x, position.y + glyph->offset_y / scale.y, 0);
+					maths::vec2 size(glyph->width / scale.x, -(glyph->height / scale.y));
 
 					float u0 = glyph->s0;
 					float v0 = glyph->t0;
 					float u1 = glyph->s1;
 					float v1 = glyph->t1;
 
-					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y0, 0);
+					maths::vec3 transformated_pos = *m_TransformationBack * current_pos;
+
+					m_Buffer->vertex = transformated_pos;
 					m_Buffer->uv = maths::vec2(u0, v0);
 					m_Buffer->tid = ts;
 					m_Buffer->color = color;
 					m_Buffer++;
 
-					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x0, y1, 0);
+					transformated_pos.y += size.y;
+
+					m_Buffer->vertex = transformated_pos;
 					m_Buffer->uv = maths::vec2(u0, v1);
 					m_Buffer->tid = ts;
 					m_Buffer->color = color;
 					m_Buffer++;
 
-					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y1, 0);
+					transformated_pos.x += size.x;
+
+					m_Buffer->vertex = transformated_pos;
 					m_Buffer->uv = maths::vec2(u1, v1);
 					m_Buffer->tid = ts;
 					m_Buffer->color = color;
 					m_Buffer++;
 
-					m_Buffer->vertex = *m_TransformationBack * maths::vec3(x1, y0, 0);
+					transformated_pos.y -= size.y;
+
+					m_Buffer->vertex = transformated_pos;
 					m_Buffer->uv = maths::vec2(u1, v0);
 					m_Buffer->tid = ts;
 					m_Buffer->color = color;

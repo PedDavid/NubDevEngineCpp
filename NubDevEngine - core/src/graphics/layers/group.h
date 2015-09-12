@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\renderers\renderable2d.h"
+#include "..\renderables\renderable2d.h"
 
 namespace engine{
 	namespace graphics{

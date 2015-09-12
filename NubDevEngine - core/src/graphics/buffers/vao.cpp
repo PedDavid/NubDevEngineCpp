@@ -15,14 +15,14 @@ namespace engine{
 		}
 
 		void VAO::addBuffer(VBO *buffer, GLuint index){
-			bind();
+			GlCheck(glBindVertexArray(m_ArrayID));
 			buffer->bind();
 
 			GlCheck(glEnableVertexAttribArray(index));
 			GlCheck(glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0));
 
 			buffer->unbind();
-			unbind();
+			GlCheck(glBindVertexArray(0));
 
 			m_Buffers.push_back(buffer);
 		}

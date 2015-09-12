@@ -13,22 +13,6 @@ namespace engine{
 			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		}
 
-		VBO::VBO(std::vector<maths::vec3> *data)
-			: m_ComponentCount(3){
-			GlCheck(glGenBuffers(1, &m_BufferID));
-			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, m_BufferID));
-			GlCheck(glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec3), &data->front(), GL_STATIC_DRAW));
-			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, 0));
-		}
-
-		VBO::VBO(std::vector<maths::vec4> *data)
-			: m_ComponentCount(4){
-			GlCheck(glGenBuffers(1, &m_BufferID));
-			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, m_BufferID));
-			GlCheck(glBufferData(GL_ARRAY_BUFFER, data->size() * sizeof(maths::vec4), &data->front(), GL_STATIC_DRAW));
-			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, 0));
-		}
-
 		VBO::~VBO(){
 			GlCheck(glDeleteBuffers(1, &m_BufferID));
 		}

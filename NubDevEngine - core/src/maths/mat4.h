@@ -16,7 +16,6 @@ namespace engine{
 			mat4(float diagonal);
 
 			static mat4 identity();
-			
 
 			static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);
 			static mat4 prespective(float fov, float aspectRatio, float near, float far);

@@ -83,14 +83,17 @@ namespace engine{
 
 		mat4 mat4::prespective(float fov, float aspectRatio, float near, float far){
 			mat4 result;
-			float q = 1.0f / tan(toRadians(0.5f * fov));
-			float b = (near + far) / (near - far);
 
-			result.elements[0 + 0 * 4] = q / aspectRatio;
-			result.elements[1 + 1 * 4] = q;
-			result.elements[2 + 2 * 4] = b;
+			float yScale = 1.0f / tan(toRadians(fov/2.0f));
+			float xScale = yScale / aspectRatio;
+
+			float frustumLength = far - near;
+
+			result.elements[0 + 0 * 4] = xScale;
+			result.elements[1 + 1 * 4] = yScale;
+			result.elements[2 + 2 * 4] = -(far + near) / frustumLength;
 			result.elements[3 + 2 * 4] = -1.0f;
-			result.elements[2 + 3 * 4] = 2.0f * b;
+			result.elements[2 + 3 * 4] = -(2.0f * far * near) / frustumLength;
 
 			return result;
 		}
@@ -113,17 +116,17 @@ namespace engine{
 			float s = sin(r);
 			float omc = 1.0f - c;
 
-			result.elements[0 + 0 * 4] = axis.x * omc + c;
+			result.elements[0 + 0 * 4] = axis.x * axis.x * omc + c;
 			result.elements[1 + 0 * 4] = axis.x * axis.y * omc + axis.z * s;
-			result.elements[2 + 0 * 4] = axis.x * axis.z * omc + axis.y * s;
+			result.elements[2 + 0 * 4] = axis.x * axis.z * omc - axis.y * s;
 
-			result.elements[0 + 1 * 4] = axis.x * axis.y * omc - axis.z * s;
-			result.elements[1 + 1 * 4] = axis.y * omc + c;
+			result.elements[0 + 1 * 4] = axis.y * axis.x * omc - axis.z * s;
+			result.elements[1 + 1 * 4] = axis.y * axis.y * omc + c;
 			result.elements[2 + 1 * 4] = axis.y * axis.z * omc + axis.x * s;
 
-			result.elements[0 + 2 * 4] = axis.x * axis.z * omc + axis.y * s;
-			result.elements[1 + 2 * 4] = axis.y * axis.z * omc - axis.x * s;
-			result.elements[2 + 2 * 4] = axis.z * omc + c;
+			result.elements[0 + 2 * 4] = axis.z * axis.x * omc + axis.y * s;
+			result.elements[1 + 2 * 4] = axis.z * axis.y * omc - axis.x * s;
+			result.elements[2 + 2 * 4] = axis.z * axis.z * omc + c;
 
 			return result;
 		}

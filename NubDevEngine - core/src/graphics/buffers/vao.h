@@ -22,6 +22,8 @@ namespace engine{
 			void addBuffer(VBO *buffer, GLuint index);
 			void bind() const;
 			void unbind() const;
+
+			inline GLuint getID(){ return m_ArrayID; }
 		};
 
 	}

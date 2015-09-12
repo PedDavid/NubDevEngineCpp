@@ -18,10 +18,10 @@ namespace engine {
 				case GL_CONTEXT_LOST:		error = "CONTEXT LOST";			break;
 				case GL_TABLE_TOO_LARGE:	error = "TABLE TO LARGE";		break;
 				case GL_INVALID_FRAMEBUFFER_OPERATION: error = "INVALID FRAMEBUFFER OPERATION"; break;
-				default: error = std::to_string(err);
+				default: error = "";
 			}
 
-			NUB_ERROR(std::string("[OpenGL] ") + error + " | Call: " + stmt + '\n' + 
+			NUB_ERROR(std::string("[OpenGL] ") + error + " (" + std::to_string(err) + ")" + " | Call: " + stmt + '\n' + 
 				'\t' + "File: " + file + " | Line: " + std::to_string(line));
 			err = glGetError();
 		}

@@ -39,7 +39,7 @@ namespace engine{
 		return lines;
 	}
 
-	graphics::IBO read_obj(const char* filepath, graphics::VAO *vao){
+	void read_obj(const char* filepath, std::vector<maths::vec3> &temp_vertices, std::vector<unsigned int> &vertexIndices){
 		std::deque<std::string> lines;
 		FILE *file = fopen(filepath, "rt");
 		
@@ -47,8 +47,8 @@ namespace engine{
 		float x, y, z;
 		bool hasUvs = false, hasNormals = false;
 
-		std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
-		std::vector< maths::vec3 > temp_vertices;
+		std::vector< unsigned int > /*vertexIndices,*/ uvIndices, normalIndices;
+		//std::vector< maths::vec3 > temp_vertices;
 		std::vector< maths::vec2 > temp_uvs;
 		std::vector< maths::vec3 > temp_normals;
 
@@ -95,20 +95,15 @@ namespace engine{
 		}
 		fclose(file);
 
-		std::vector<maths::vec2> out_uvs(temp_vertices.size());
-		std::vector<maths::vec3> out_normals(temp_vertices.size());
+		//std::vector<maths::vec2> out_uvs(temp_vertices.size());
+		//std::vector<maths::vec3> out_normals(temp_vertices.size());
 		std::vector<maths::vec4> out_colors(temp_vertices.size());
 
 		for (unsigned int i = 0; i < vertexIndices.size(); i++){
 			unsigned int vertexPointer = vertexIndices[i];
-			out_colors[vertexPointer] = maths::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-			if (hasUvs) out_uvs[vertexPointer] = temp_uvs[uvIndices[i]];
-			if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
+			out_colors[vertexPointer] = maths::vec4(1.0f, 0.0f, 1.0f, 1.0f);
+		//	if (hasUvs) out_uvs[vertexPointer] = temp_uvs[uvIndices[i]];
+		//	if (hasNormals) out_normals[vertexPointer] = temp_normals[normalIndices[i]];
 		}
-
-		vao->addBuffer(new graphics::VBO(&temp_vertices), 0);
-		vao->addBuffer(new graphics::VBO(&out_colors), 1);
-		graphics::IBO ibo(&vertexIndices.front(), vertexIndices.size());
-		return ibo;
 	}
 }

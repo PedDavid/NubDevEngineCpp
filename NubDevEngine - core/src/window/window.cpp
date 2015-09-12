@@ -45,6 +45,8 @@ namespace engine{
 			GlCheck(glEnable(GL_BLEND));
 			GlCheck(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
+			GlCheck(glEnable(GL_DEPTH_TEST));
+
 			NUB_SUCCESS("[GLEW] INIT");
 			NUB_INFO(std::string("[OpenGL] v") + (char*)glGetString(GL_VERSION));
 			NUB_INFO(std::string("[GLSL] v") + (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));

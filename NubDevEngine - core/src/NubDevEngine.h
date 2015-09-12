@@ -4,8 +4,8 @@
 
 #include "graphics\layers\layer.h"
 #include "graphics\layers\group.h"
-#include "graphics\renderers\sprite.h"
-#include "graphics\renderers\label.h"
+#include "graphics\renderables\sprite.h"
+#include "graphics\renderables\label.h"
 
 #include "audio\SoundManager.h"
 
