@@ -8,5 +8,5 @@ in DATA{
 
 void main()
 {
-	color = vec4(1.0, 0.0f, 1.0, 1.0); //fs_in.color;
+	color = fs_in.color;
 }

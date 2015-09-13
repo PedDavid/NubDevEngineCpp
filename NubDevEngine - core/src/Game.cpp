@@ -112,7 +112,7 @@ public:
 		//shader->setUniform2f("light", vec2((float)(x * 32.0f / m_Window->getWidth() -16.0f), (float)(9.0f - y * 18.0f / m_Window->getHeight())));
 		//shader->disable();
 		//layer->render();
-		renderer->submit(entity);
+		//renderer->submit(entity);
 		renderer->submit(entity2);
 		renderer->flush();
 	}
