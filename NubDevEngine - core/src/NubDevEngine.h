@@ -15,13 +15,15 @@
 
 namespace engine{
 
+	using namespace graphics;
+	using namespace audio;
+	using namespace maths;
+
 	class NubDevEngine{
 
 	private:
 		unsigned int m_FramesPerSecond, m_UpdatesPerSecond;
-
-	protected:
-		graphics::Window* m_Window;
+		std::vector<Window*> m_Windows;
 
 	protected:
 		NubDevEngine() : m_FramesPerSecond(0), m_UpdatesPerSecond(0) {
@@ -29,19 +31,23 @@ namespace engine{
 		}
 
 		virtual ~NubDevEngine(){
-			delete m_Window;
+			for (Window *m_Window : m_Windows){
+				delete m_Window;
+			}
 		}
 
-		graphics::Window* createWindow(const char *name, int width, int height){
-			m_Window = new graphics::Window(name, width, height);
-			return m_Window;
+		Window *createWindow(const char *name, int width, int height){
+			m_Windows.push_back(new Window(name, width, height));
+			return m_Windows.back();
 		}
 
 
 	public:
 		void start(){
+			init_services();
 			init();
 			run();
+			terminate();
 		}
 
 	protected:
@@ -58,6 +64,11 @@ namespace engine{
 		const unsigned int getUPS() const { return m_UpdatesPerSecond; }
 
 	private:
+		void init_services(){
+			FontManager::init();
+			SoundManager::init();
+		}
+
 		void run(){
 
 			Timer timer;
@@ -83,6 +94,7 @@ namespace engine{
 				render();
 				frames++;
 				m_Window->update();
+				SoundManager::update();
 
 				if ((timer.elapsed() - tickTime) > tickBrake){
 					tickTime += tickBrake;
@@ -93,6 +105,11 @@ namespace engine{
 					tick();
 				}
 			}
+		}
+
+		void terminate(){
+			FontManager::clean();
+			SoundManager::clean();
 		}
 
 	};

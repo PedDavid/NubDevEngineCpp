@@ -9,10 +9,12 @@ namespace engine{
 
 		private:
 			maths::mat4 m_ViewMatrix = maths::mat4::identity();
+		public:
 			maths::vec3 m_Pos = maths::vec3(0, 0, 0);
-			float m_Yaw = 0.0f;
-			float m_Pitch = 0.0f;
-			float m_Roll = 0.0f;
+
+			float m_Yaw = 0.0f;		//y
+			float m_Pitch = 0.0f;	//x
+			float m_Roll = 0.0f;	//z
 
 		public:
 			Camera(maths::vec3 position) : m_Pos(position) {

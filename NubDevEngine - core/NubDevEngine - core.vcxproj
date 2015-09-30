@@ -61,6 +61,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;FreeImage.lib;OpenAL32.lib;libvorbis.lib;libogg.lib;freetype26MT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,6 +144,7 @@
     <ClInclude Include="src\Config.h" />
     <ClInclude Include="src\entities\Camera.h" />
     <ClInclude Include="src\entities\Entity.h" />
+    <ClInclude Include="src\entities\Triangle.h" />
     <ClInclude Include="src\entities\Mesh.h" />
     <ClInclude Include="src\graphics\font.h" />
     <ClInclude Include="src\graphics\FontManager.h" />

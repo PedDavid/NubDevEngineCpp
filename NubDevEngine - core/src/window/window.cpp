@@ -3,28 +3,28 @@
 namespace engine{
 	namespace graphics{
 
-		Window::Window(const char *name, int width, int height){
+		Window::Window(const char *name, int width, int height, Window *window){
 			m_Name = name;
 			m_Width = width;
 			m_Height = height;
-			if (!init()){
+			m_Window = window ? window->m_Window : nullptr;
+			if (!window_init()){
 				glfwTerminate();
 			}
 		}
 
 		Window::~Window(){
 			glfwTerminate();
-			FontManager::clean();
-			audio::SoundManager::clean();
 		}
 
-		bool Window::init(){
+		bool Window::window_init(){
 			if (!glfwInit()){
 				NUB_FATAL("[GLFW] INIT");
 				return false;
 			}
+			NUB_SUCCESS("[GLFW] INIT");
 			glfwWindowHint(GLFW_SAMPLES, 4);
-			m_Window = glfwCreateWindow(m_Width, m_Height, m_Name, NULL, NULL);
+			m_Window = glfwCreateWindow(m_Width, m_Height, m_Name, NULL, m_Window);
 			if (!m_Window){
 				NUB_FATAL("[GLFW] WINDOW CREATION");
 				return false;
@@ -35,7 +35,7 @@ namespace engine{
 			glfwSetKeyCallback(m_Window, key_callback);
 			glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 			glfwSetCursorPosCallback(m_Window, cursor_position_callback);
-			NUB_SUCCESS("[GLFW] INIT");
+			NUB_SUCCESS("[GLFW] Window creation");
 
 			if (glewInit() != GLEW_OK){
 				NUB_FATAL("[GLEW] INIT");
@@ -51,9 +51,6 @@ namespace engine{
 			NUB_INFO(std::string("[OpenGL] v") + (char*)glGetString(GL_VERSION));
 			NUB_INFO(std::string("[GLSL] v") + (char*)glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-			FontManager::init();
-			audio::SoundManager::init();
-
 			return true;
 		}
 
@@ -62,10 +59,8 @@ namespace engine{
 		}
 
 		void Window::update() const{
-			glfwPollEvents();
 			glfwSwapBuffers(m_Window);
-
-			audio::SoundManager::update();
+			glfwPollEvents();
 		}
 
 		bool Window::closed() const{

@@ -3,7 +3,7 @@
 namespace engine{
 	namespace maths{
 
-		vec4::vec4(const float& x, const float& y, const float& z, const float& w)
+		vec4::vec4(float x, float y, float z, float w)
 			: x(x), y(y), z(z), w(w){	}
 
 		vec4& vec4::add(const vec4& other){
@@ -42,6 +42,15 @@ namespace engine{
 			return *this;
 		}
 
+		vec4 &vec4::scale(const float &scalar){
+			x *= scalar;
+			y *= scalar;
+			z *= scalar;
+			w *= scalar;
+
+			return *this;
+		}
+
 		vec4 operator+(vec4& left, const vec4 right){
 			return left.add(right);
 		}
@@ -70,6 +79,10 @@ namespace engine{
 			return multiply(right);
 		}
 
+		vec4& vec4::operator*=(const float& scalar){
+			return scale(scalar);
+		}
+
 		vec4& vec4::operator/=(const vec4& right){
 			return divide(right);
 		}
@@ -80,6 +93,10 @@ namespace engine{
 
 		bool vec4::operator!=(const vec4& right){
 			return !(*this == right);
+		}
+
+		float vec4::getMagnitude(){
+			return sqrt(x * x + y * y + z * z + w * w);
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const vec4& vector){

@@ -33,22 +33,23 @@ namespace engine{
 			void push(maths::mat4 matrix, bool override = false){
 				if (override){
 					m_TransformationStack.push_back(matrix);
+					m_TransformationBack = &matrix;
 				}
 				else{
 					m_TransformationStack.push_back(m_TransformationStack.back() * matrix);
-				}
-				m_TransformationBack = &m_TransformationStack.back();
+					m_TransformationBack = &m_TransformationStack.back();
+				}	
 			}
 
 			void pop(){
 				
 				if (m_TransformationStack.size() > 1){
 					m_TransformationStack.pop_back();
+					m_TransformationBack = &m_TransformationStack.back();
 				}
 				else{
 					NUB_WARN("[Renderer2D] Can't pop TransformationStack");
 				}
-				m_TransformationBack = &m_TransformationStack.back();
 			}
 
 			virtual void begin(){}

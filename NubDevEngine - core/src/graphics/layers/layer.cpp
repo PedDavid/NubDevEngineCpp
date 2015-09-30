@@ -15,7 +15,7 @@ namespace engine{
 				20, 21, 22, 23, 24, 25,	26, 27, 28, 29,
 				30, 31
 			};
-			m_Shader->setUniform1iv("textures", texIDs, 10);
+			m_Shader->setUniform1iv("textures", texIDs, 32);
 
 			m_Shader->disable();
 		}
@@ -34,10 +34,9 @@ namespace engine{
 		void Layer::render(){
 			m_Shader->enable();
 			m_Renderer->begin();
-			for (int i = 0; i < m_Renderables.size(); i++){
-				m_Renderables[i]->submit(m_Renderer);
+			for (Renderable2D *renderable : m_Renderables){
+				renderable->submit(m_Renderer);
 			}
-
 			m_Renderer->end();
 			m_Renderer->flush();
 			m_Shader->disable();

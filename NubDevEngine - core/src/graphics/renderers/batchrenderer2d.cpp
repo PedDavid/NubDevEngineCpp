@@ -10,6 +10,7 @@ namespace engine{
 		BatchRenderer2D::~BatchRenderer2D(){
 			delete m_IBO;
 			GlCheck(glDeleteBuffers(1, &m_VBO));
+			GlCheck(glDeleteVertexArrays(1, &m_VAO));
 		}
 
 		void BatchRenderer2D::init(){

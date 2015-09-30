@@ -49,7 +49,7 @@ namespace engine{
 			for (Font *font : m_Fonts){
 				delete font;
 			}
-			NUB_SUCCESS("[SoundManager] CLOSED");
+			NUB_SUCCESS("[FontManager] CLOSED");
 		}
 	}
 }

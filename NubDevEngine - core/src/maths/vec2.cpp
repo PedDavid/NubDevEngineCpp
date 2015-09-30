@@ -3,7 +3,7 @@
 namespace engine{
 	namespace maths{
 
-		vec2::vec2(const float& x, const float& y) 
+		vec2::vec2(float x, float y) 
 			: x(x) , y(y){	}
 
 		vec2& vec2::add(const vec2& other){
@@ -21,15 +21,22 @@ namespace engine{
 		}
 
 		vec2& vec2::multiply(const vec2& other){
-			x -= other.x;
-			y -= other.y;
+			x *= other.x;
+			y *= other.y;
 
 			return *this;
 		}
 
 		vec2& vec2::divide(const vec2& other){
-			x -= other.x;
-			y -= other.y;
+			x /= other.x;
+			y /= other.y;
+
+			return *this;
+		}
+
+		vec2& vec2::scale(const float &scalar){
+			x *= scalar;
+			y *= scalar;
 
 			return *this;
 		}
@@ -62,6 +69,10 @@ namespace engine{
 			return multiply(right);
 		}
 
+		vec2& vec2::operator*=(const float &scalar){
+			return scale(scalar);
+		}
+
 		vec2& vec2::operator/=(const vec2& right){
 			return divide(right);
 		}
@@ -72,6 +83,10 @@ namespace engine{
 
 		bool vec2::operator!=(const vec2& right){
 			return !(*this == right);
+		}
+
+		float vec2::getMagnitude(){
+			return sqrt(x * x + y * y);
 		}
 
 		std::ostream& operator<<(std::ostream& stream, const vec2& vector){

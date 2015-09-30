@@ -9,7 +9,7 @@ namespace engine{
 
 			GlCheck(glGenBuffers(1, &m_BufferID));
 			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, m_BufferID));
-			GlCheck(glBufferData(GL_ARRAY_BUFFER, count * sizeof(GLfloat), data, GL_STATIC_DRAW));
+			GlCheck(glBufferData(GL_ARRAY_BUFFER, count * componentCount * sizeof(GLfloat), data, GL_STATIC_DRAW));
 			GlCheck(glBindBuffer(GL_ARRAY_BUFFER, 0));
 		}
 

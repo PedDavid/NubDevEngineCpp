@@ -27,12 +27,14 @@ namespace engine {
 			double mx = 0, my = 0;
 
 		public:
-			Window(const char *name, int width, int height);
+			Window(const char *name, int width, int height, Window *window = nullptr);
 			~Window();
 
 			void clear() const;
 			void update() const;
 			bool closed() const;
+
+			inline void setCurrent() const { glfwMakeContextCurrent(m_Window); }
 
 			inline unsigned int getWidth() const { return m_Width; }
 			inline unsigned int getHeight() const { return m_Height; }
@@ -42,7 +44,7 @@ namespace engine {
 			void getMousePosition(double& x, double& y) const;
 
 		private:
-			bool init();
+			bool window_init();
 
 			friend void window_resize(GLFWwindow *window, int width, int height);
 

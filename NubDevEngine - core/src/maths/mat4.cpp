@@ -3,17 +3,14 @@
 namespace engine{
 	namespace maths{
 
-		mat4::mat4(){
-			for (int i = 0; i < 4 * 4; i++){
-				elements[i] = 0.0f;
-			}
+		mat4::mat4() : mat4(0.0f){
 		}
 
-		mat4::mat4(float diagonal) : mat4(){
-			elements[0 + 0 * 4] = diagonal;
-			elements[1 + 1 * 4] = diagonal;
-			elements[2 + 2 * 4] = diagonal;
-			elements[3 + 3 * 4] = diagonal;
+		mat4::mat4(float diag){
+			m11 = diag;	m12 = 0.0f;	m13 = 0.0f;	m14 = 0.0f;
+			m21 = 0.0f;	m22 = diag;	m23 = 0.0f;	m24 = 0.0f;
+			m31 = 0.0f;	m32 = 0.0f;	m33 = diag;	m34 = 0.0f;
+			m41 = 0.0f;	m42 = 0.0f;	m43 = 0.0f;	m44 = diag;
 		}
 
 		mat4 mat4::identity(){
@@ -70,30 +67,29 @@ namespace engine{
 
 		mat4 mat4::orthographic(float left, float right, float bottom, float top, float near, float far){
 			mat4 result(1.0f);
-			result.elements[0 + 0 * 4] = 2.0f / (right - left);
-			result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
-			result.elements[2 + 2 * 4] = 2.0f / (near - far);
+			result.m11 = 2.0f / (right - left);
+			result.m22 = 2.0f / (top - bottom);
+			result.m33 = 2.0f / (near - far);
 
-			result.elements[0 + 3 * 4] = (left + right) / (left - right);
-			result.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
-			result.elements[2 + 3 * 4] = (far + near) / (far - near);
+			result.m14 = (left + right) / (left - right);
+			result.m24 = (bottom + top) / (bottom - top);
+			result.m34 = (far + near) / (near - far);
 
 			return result;
 		}
 
 		mat4 mat4::prespective(float fov, float aspectRatio, float near, float far){
 			mat4 result;
-
-			float yScale = 1.0f / tan(toRadians(fov/2.0f));
-			float xScale = yScale / aspectRatio;
+			float xScale = 1.0f / tan(toRadians(fov/2.0f));
+			float yScale = xScale * aspectRatio;
 
 			float frustumLength = far - near;
 
-			result.elements[0 + 0 * 4] = xScale;
-			result.elements[1 + 1 * 4] = yScale;
-			result.elements[2 + 2 * 4] = -(far + near) / frustumLength;
-			result.elements[3 + 2 * 4] = -1.0f;
-			result.elements[2 + 3 * 4] = -(2.0f * far * near) / frustumLength;
+			result.m11 = xScale;
+			result.m22 = yScale;
+			result.m33 = -(far + near) / frustumLength;
+			result.m43 = -1.0f;
+			result.m34 = -(2.0f * far * near) / frustumLength;
 
 			return result;
 		}
@@ -101,9 +97,9 @@ namespace engine{
 		mat4 mat4::translation(const vec3& translation){
 			mat4 result(1.0f);
 
-			result.elements[0 + 3 * 4] = translation.x;
-			result.elements[1 + 3 * 4] = translation.y;
-			result.elements[2 + 3 * 4] = translation.z;
+			result.m14 = translation.x;
+			result.m24 = translation.y;
+			result.m34 = translation.z;
 
 			return result;
 		}
@@ -116,17 +112,32 @@ namespace engine{
 			float s = sin(r);
 			float omc = 1.0f - c;
 
-			result.elements[0 + 0 * 4] = axis.x * axis.x * omc + c;
-			result.elements[1 + 0 * 4] = axis.x * axis.y * omc + axis.z * s;
-			result.elements[2 + 0 * 4] = axis.x * axis.z * omc - axis.y * s;
+			result.m11 = axis.x * axis.x * omc + c;
+			result.m21 = axis.x * axis.y * omc + axis.z * s;
+			result.m31 = axis.x * axis.z * omc - axis.y * s;
 
-			result.elements[0 + 1 * 4] = axis.y * axis.x * omc - axis.z * s;
-			result.elements[1 + 1 * 4] = axis.y * axis.y * omc + c;
-			result.elements[2 + 1 * 4] = axis.y * axis.z * omc + axis.x * s;
+			result.m12 = axis.y * axis.x * omc - axis.z * s;
+			result.m22 = axis.y * axis.y * omc + c;
+			result.m32 = axis.y * axis.z * omc + axis.x * s;
 
-			result.elements[0 + 2 * 4] = axis.z * axis.x * omc + axis.y * s;
-			result.elements[1 + 2 * 4] = axis.z * axis.y * omc - axis.x * s;
-			result.elements[2 + 2 * 4] = axis.z * axis.z * omc + c;
+			result.m13 = axis.z * axis.x * omc + axis.y * s;
+			result.m23 = axis.z * axis.y * omc - axis.x * s;
+			result.m33 = axis.z * axis.z * omc + c;
+
+			return result;
+		}
+
+		mat4 mat4::sheer(int line, int column, float distance){
+			mat4 result(1.0f);
+
+			//	| 1    Syx  Szx  0	|
+			//	| Sxy  1    Szy  0	|
+			//	| Sxz  Syz  1    0	|
+			//	| 0    0    0    1	|
+			//	Where Sij implements a shear of I by J
+			//	Thus, Sxy shears X by Y
+
+			result.elements[(line - 1) + (column - 1) * 4] = distance;
 
 			return result;
 		}
@@ -134,9 +145,9 @@ namespace engine{
 		mat4 mat4::scale(const vec3& scale){
 			mat4 result(1.0f);
 
-			result.elements[0 + 0 * 4] = scale.x;
-			result.elements[1 + 1 * 4] = scale.y;
-			result.elements[2 + 2 * 4] = scale.z;
+			result.m11 = scale.x;
+			result.m22 = scale.y;
+			result.m33 = scale.z;
 
 			return result;
 		}
